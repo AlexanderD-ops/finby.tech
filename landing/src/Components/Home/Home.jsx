@@ -8,6 +8,7 @@ import { TokenStrategyTypes } from './TokenStrategyTypes';
 import { BuyTokens } from './BuyTokens';
 import { WhySelectUs } from './WhySelectUs';
 import Tokens from './Tokens';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   home: {
@@ -44,6 +45,21 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
+  footerContainer: {
+    padding: '40px 0',
+    minHeight: '200px',
+    backgroundColor: '#FAFAFA',
+  },
+  footer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  footerLink: {
+    color: "#000 !important",
+    marginRight: '15px',
+    textDecoration: 'none',
+  }
 });
 
 const Home = () => {
@@ -72,6 +88,22 @@ const Home = () => {
       <TokenStrategyTypes />
       <BuyTokens />
       <WhySelectUs />
+      <div className={classes.footerContainer}>
+        <Container>
+          <div className={classes.footer}>
+            <div>Copyright © 2024</div>
+            <div>
+              <NavLink exact to="/" className={classes.footerLink}>О сервисе</NavLink>
+              <a href="https://near.org/" target='_blank' className={classes.footerLink} rel="noreferrer">NEAR</a>
+              <a target='_blank' className={classes.footerLink} rel="noreferrer"
+              href="https://www.finam.ru/landings/open-order-new/?AgencyBackOfficeID=1&agent=46504c8f-c84d-4e01-bef2-b8eef1b51d26" >
+                ФИНАМ
+              </a>
+              <NavLink to="/link3" className={classes.footerLink}>White Paper</NavLink>
+            </div>
+          </div>
+        </Container>
+      </div>
     </div>
   );
 };

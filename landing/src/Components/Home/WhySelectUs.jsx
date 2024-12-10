@@ -37,7 +37,7 @@ const useStyles = makeStyles({
         },
     },
     container: {
-        marginBottom: '80px',
+        marginBottom: '180px',
     },
     descriptiondivTitle: {
         fontSize: '31px',

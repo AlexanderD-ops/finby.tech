@@ -6,7 +6,7 @@ import image2 from '../../static/BuyTokens/2.png';
 import image3 from '../../static/BuyTokens/3.png';
 import image4 from '../../static/BuyTokens/4.png';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
     title: {
         fontSize: '72px',
         fontWeight: '700',
@@ -37,14 +37,13 @@ const useStyles = makeStyles(() => ({
         flex: 1,
         background: 'radial-gradient(66.71% 66.71% at 50% 50%, #EDF4FF 10%, #FFFFFF 100%)',
         border: '1px solid rgb(26 116 253 / 10%)',
-        //borderImageSource: 'linear-gradient(180deg, #FFFFFF 10%, rgba(26, 116, 253, 0.1) 100%)',
         display: 'flex',
         gap: '16px',
         alignItems: 'center'
     },
-}));
+});
 
-export const BuyTokens = () => {
+export const BuyTokens: React.FC = () => {
     const classes = useStyles();
 
     return (
@@ -53,20 +52,19 @@ export const BuyTokens = () => {
                 <div className={classes.title}>Купить токены</div>
                 <div className={classes.description}>
                     <div className={classes.descriptiondiv}>
-                        <div><img src={image1} /></div>
+                        <div><img src={image1} alt="Registration" /></div>
                         <span>Регистрация и верификация на сайте Bynex</span>
                     </div>
                     <div className={classes.descriptiondiv}>
-                        <div><img src={image2} /></div>
+                        <div><img src={image2} alt="Payment" /></div>
                         <span>Пополнение счета в российских рублях</span>
                     </div>
                     <div className={classes.descriptiondiv}>
-                        <div><img src={image3} /></div>
+                        <div><img src={image3} alt="Support" /></div>
                         <span>Отправка поручения через отдел VIP поддержки Bynex</span>
-
                     </div>
                     <div className={classes.descriptiondiv}>
-                        <div><img src={image4} /></div>
+                        <div><img src={image4} alt="Success" /></div>
                         <span>Токены у вас в портфеле!</span>
                     </div>
                 </div>

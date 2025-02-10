@@ -62,7 +62,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Home = () => {
+const Home: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -93,7 +93,7 @@ const Home = () => {
           <div className={classes.footer}>
             <div>Copyright © 2024</div>
             <div>
-              <NavLink exact to="/" className={classes.footerLink}>О сервисе</NavLink>
+              <NavLink to="/" className={classes.footerLink}>О сервисе</NavLink>
               <a href="https://near.org/" target='_blank' className={classes.footerLink} rel="noreferrer">NEAR</a>
               <a target='_blank' className={classes.footerLink} rel="noreferrer"
               href="https://www.finam.ru/landings/open-order-new/?AgencyBackOfficeID=1&agent=46504c8f-c84d-4e01-bef2-b8eef1b51d26" >

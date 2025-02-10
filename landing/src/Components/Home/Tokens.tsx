@@ -114,7 +114,7 @@ const CustomButton = styled(Button)({
 //     return (<Button className={classes.customButton} variant="outlined">{children}</Button>);
 // };
 
-const NumberWithArrow = ({ number, str }) => {
+const NumberWithArrow = ({ number, str }: { number: number; str: string }) => {
     const classes = useStyles();
     const isNegative = number < 0;
     const arrowImg = isNegative ? ArrowDown : ArrowUp;
@@ -122,16 +122,27 @@ const NumberWithArrow = ({ number, str }) => {
 
     return (
         <span>
-            <img src={arrowImg} alt={isNegative ? 'Arrow Down' : 'Arrow Up'} className={classes.arrow} />
+            <img src={arrowImg} alt={isNegative ? 'Arrow Down' : 'Arrow Up'} />
             <span className={numberClass}>{number.toFixed(2)} </span><span className={classes.strClass}>{str}</span>
         </span>
     );
 };
 
+interface TokenItem {
+    symbol: string;
+    watchPriceBid: number;
+    watchPriceAsk: number;
+    watchDate: string;
+    risk: string;
+    profitPerc1Day: number;
+    profitPerc1Week: number;
+    profitPerc1Month: number;
+}
+
 export const Tokens = () => {
     const classes = useStyles();
 
-    const [items, setItems] = useState({ products: [] });
+    const [items, setItems] = useState<{ products: TokenItem[] }>({ products: [] });
 
     useEffect(() => {
         axios.get('https://finby.by/api/v1/watch/read?user_key=d8b53b40-9abe-422e-80f6-db148aafe25b')
@@ -167,13 +178,13 @@ export const Tokens = () => {
                             <div className={classes.tokenItem} style={{ background: '#fff' }}>
                                 <div>
                                     <div className={classes.tokenName}>
-                                        <b>{item.symbol}</b>
+                                        <b>{(item as any).symbol}</b>
                                     </div>
                                     <div className={classes.tokenInfo}>
                                         <div className={classes.tokenInfoItem1}>Текущая стоимость</div>
-                                        <div className={classes.tokenValue}>{item.watchPriceBid.toLocaleString('ru-RU', {
+                                        <div className={classes.tokenValue}>{(item as any).watchPriceBid.toLocaleString('ru-RU', {
                                             minimumFractionDigits: 0, maximumFractionDigits: 2, currency: 'RUB', style: 'currency',
-                                        })} / {item.watchPriceAsk.toLocaleString('ru-RU', {
+                                        })} / {(item as any).watchPriceAsk.toLocaleString('ru-RU', {
                                             minimumFractionDigits: 0, maximumFractionDigits: 2, currency: 'RUB', style: 'currency',
                                         })}</div>
                                     </div>

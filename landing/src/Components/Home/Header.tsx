@@ -102,14 +102,14 @@ const Header = () => {
         </div>
         <div className={classes.linksContainer}>
           <div className={classes.pageLinks}>
-            <NavLink exact to="/" className={classes.link} activeClassName="active">Главная</NavLink>
-            <NavLink to="/link1" className={classes.link} activeClassName="active">Токены</NavLink>
-            <NavLink to="/link2" className={classes.link} activeClassName="active">Инструкция</NavLink>
-            <NavLink to="/link3" className={classes.link} activeClassName="active">О нас</NavLink>
+            <NavLink to="/" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Главная</NavLink>
+            <NavLink to="/link1" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Токены</NavLink>
+            <NavLink to="/link2" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Инструкция</NavLink>
+            <NavLink to="/link3" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>О нас</NavLink>
           </div>
           <div className={classes.authBtns}>
             <NavLink to="/" className={classes.buttonSignIn}>Войти</NavLink>
-            <NavLink className={classes.buttonSignUp}>Регистрация <img src={vector} /></NavLink>
+            <NavLink to="/register" className={classes.buttonSignUp}>Регистрация <img src={vector} alt="vector" /></NavLink>
           </div>
         </div>
       </div>

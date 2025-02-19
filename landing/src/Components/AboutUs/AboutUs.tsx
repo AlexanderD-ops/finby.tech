@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import officeImage from '../../static/AboutUs/office.png';
-import finamLogo from '../../static/AboutUs/finam.png';
-import mtbankLogo from '../../static/AboutUs/mtbank.png';
-import softClubLogo from '../../static/AboutUs/softclub.png';
-import bntechLogo from '../../static/AboutUs/bntech.png';
+import officeImage from '../../assets/images/AboutUs/office.png';
+import finamLogo from '../../assets/images/AboutUs/finam.png';
+import mtbankLogo from '../../assets/images/AboutUs/mtbank.png';
+import softClubLogo from '../../assets/images/AboutUs/softclub.png';
+import bntechLogo from '../../assets/images/AboutUs/bntech.png';
 
 const useStyles = makeStyles(() => ({
     container: {

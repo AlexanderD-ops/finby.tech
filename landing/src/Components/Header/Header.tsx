@@ -2,8 +2,8 @@ import React from 'react';
 import { Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import logo from '../../static/finamlogo.png';
-import vector from '../../static/Vector.png';
+import logo from '../../assets/images/finamlogo.png';
+import vector from '../../assets/images/Vector.png';
 
 const useStyles = makeStyles({
   header: {
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Header = () => {
+export const Header = () => {
   const classes = useStyles();
 
   return (

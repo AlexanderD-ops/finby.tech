@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Container } from '@mui/material';
-import image1 from '../../static/BuyTokens/1.png';
-import image2 from '../../static/BuyTokens/2.png';
-import image3 from '../../static/BuyTokens/3.png';
-import image4 from '../../static/BuyTokens/4.png';
+import image1 from '../assets/images/BuyTokens/1.png';
+import image2 from '../assets/images/BuyTokens/2.png';
+import image3 from '../assets/images/BuyTokens/3.png';
+import image4 from '../assets/images/BuyTokens/4.png';
 
 const useStyles = makeStyles({
     title: {

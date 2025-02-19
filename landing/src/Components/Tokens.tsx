@@ -8,8 +8,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import ArrowUp from '../../static/arrowup.png';
-import ArrowDown from '../../static/arrowdown.png';
+import ArrowUp from '../assets/images/arrowup.png';
+import ArrowDown from '../assets/images/arrowdown.png';
 
 const useStyles = makeStyles({
     title: {

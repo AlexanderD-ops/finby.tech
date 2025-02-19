@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import okImage from '../../static/Ok.jpg';
-import { WhatIsTokens } from './WhatIsTokens';
-import { TokenStrategyBenefits } from './TokenStrategyBenefits';
-import { TokenStrategyTypes } from './TokenStrategyTypes';
-import { BuyTokens } from './BuyTokens';
-import { WhySelectUs } from './WhySelectUs';
-import Tokens from './Tokens';
+import okImage from '../../assets/images/Ok.jpg';
+import { WhatIsTokens } from '../WhatIsTokens';
+import { TokenStrategyBenefits } from '../TokenStrategyBenefits';
+import { TokenStrategyTypes } from '../TokenStrategyTypes';
+import { BuyTokens } from '../BuyTokens';
+import { WhySelectUs } from '../WhySelectUs';
+import Tokens from '../Tokens';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const classes = useStyles();
 
   return (

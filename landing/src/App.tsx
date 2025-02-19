@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './Components/Home/Header';
 import Home from './Components/Home/Home';
+import { AboutUs } from './Components/Home/AboutUs';
 
 const theme = createTheme();
 
-const Link1 = () => <div>Link 1 Content</div>;
-const Link2 = () => <div>Link 2 Content</div>;
-const Link3 = () => <div>Link 3 Content</div>;
+const Tokens = () => <div>Link 1 Content</div>;
+const Instruction = () => <div>Link 2 Content</div>;
 
 const App: React.FC = () => {
   return (
@@ -17,9 +17,9 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/link1" element={<Link1 />} />
-          <Route path="/link2" element={<Link2 />} />
-          <Route path="/link3" element={<Link3 />} />
+          <Route path="/tokens" element={<Tokens />} />
+          <Route path="/instruction" element={<Instruction />} />
+          <Route path="/about" element={<AboutUs />} />
         </Routes>
       </Router>
     </ThemeProvider>

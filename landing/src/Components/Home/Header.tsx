@@ -103,9 +103,9 @@ const Header = () => {
         <div className={classes.linksContainer}>
           <div className={classes.pageLinks}>
             <NavLink to="/" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Главная</NavLink>
-            <NavLink to="/link1" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Токены</NavLink>
-            <NavLink to="/link2" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Инструкция</NavLink>
-            <NavLink to="/link3" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>О нас</NavLink>
+            <NavLink to="/tokens" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Токены</NavLink>
+            <NavLink to="/instruction" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Инструкция</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>О нас</NavLink>
           </div>
           <div className={classes.authBtns}>
             <NavLink to="/" className={classes.buttonSignIn}>Войти</NavLink>

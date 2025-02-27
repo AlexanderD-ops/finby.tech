@@ -19,6 +19,7 @@ deploy:
   script:
     - apt-get update -qy
     - apt-get install -y lftp
+    - ls -la landing/public_html
     - lftp -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./landing /dev.finby.tech"
   only:
     - dev

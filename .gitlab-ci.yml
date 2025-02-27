@@ -22,6 +22,6 @@ deploy:
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public
-    - lftp -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./landing/public /public_html/dev.finby.tech"
+    - lftp -d -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST"
   only:
     - dev

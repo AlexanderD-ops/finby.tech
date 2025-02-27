@@ -18,12 +18,13 @@ deploy:
   image: debian:latest
   script:
     - echo "FTP_USER=bhvaac_0"
+    - echo "FTP_PASS=NBuVsD7LPJkcG9BZ"
     - echo "FTP_HOST=www200.your-server.de"
     - echo "FTP_PATH=/public_html/dev.finby.tech"
     - echo "Testing FTP connection..."
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public
-    - lftp -d -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; ls"
+    - lftp -d -c "set ftp:passive-mode true; open -u $FTP_USER,$FTP_PASS $FTP_HOST; ls"
   only:
     - dev

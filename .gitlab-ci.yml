@@ -8,6 +8,6 @@ deploy:
     - apt-get update -qy && apt-get install -y lftp
     
     # Встановлюємо захищене з'єднання і завантажуємо файли
-    - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./public_html /remote_dir"
+    - lftp -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./public_html /remote_dir"
   only:
     - main

@@ -3,9 +3,10 @@ stages:
 
 deploy:
   stage: deploy
-  image: curlimages/curl:latest
+  image: debian:latest
   script:
-    - apt-get update -qy && apt-get install -y lftp
+    - apt-get update -qy
+    - apt-get install -y lftp
     - lftp -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./public_html /dev.finby.tech"
   only:
     - dev

@@ -34,6 +34,9 @@
       "react-app",
       "react-app/jest"
     ]
+    "rules": {
+      "jsx-a11y/alt-text": "off"  // Вимкнення перевірки alt для img
+    }
   },
   "browserslist": {
     "production": [

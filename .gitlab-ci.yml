@@ -1,5 +1,4 @@
-stages:
-  - deploy
+
 deploy:
   image: curlimages/curl:latest
   script:

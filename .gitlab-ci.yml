@@ -17,6 +17,8 @@ deploy:
   stage: deploy
   image: debian:latest
   script:
+    - echo "FTP_USER=$FTP_USER"
+    - echo "FTP_HOST=$FTP_HOST"
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public

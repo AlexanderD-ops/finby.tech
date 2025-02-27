@@ -22,6 +22,6 @@ deploy:
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public
-    - lftp -d -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST"
+    - lftp -d -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./build $FTP_PATH"
   only:
     - dev

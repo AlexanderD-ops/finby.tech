@@ -17,8 +17,10 @@ deploy:
   stage: deploy
   image: debian:latest
   script:
-    - echo "FTP_USER=$FTP_USER"
-    - echo "FTP_HOST=$FTP_HOST"
+    - echo "FTP_USER=bhvaac_0"
+    - echo "FTP_HOST=www200.your-server.de"
+    - echo "FTP_PATH=/public_html/dev.finby.tech"
+    - echo "Testing FTP connection..."
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public

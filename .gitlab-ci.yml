@@ -1,7 +1,0 @@
-deploy:
-  image: curlimages/curl:latest
-  script:
-    - apt-get update -qy && apt-get install -y lftp
-    - lftp -c "open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./public_html /remote_dir"
-  only:
-    - main

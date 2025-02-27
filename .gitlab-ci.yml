@@ -6,6 +6,7 @@ build:
   stage: build
   image: node:18
   script:
+    - cd landing
     - npm install
     - npm run build
   artifacts:

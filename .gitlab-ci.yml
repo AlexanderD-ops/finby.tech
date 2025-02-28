@@ -27,4 +27,4 @@ deploy:
     - ls -la landing/public
     - lftp -c "set ftp:ssl-allow no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./landing /public_html/dev.finby.tech/"
   only:
-    - main
+    - dev

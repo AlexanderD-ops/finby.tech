@@ -1,5 +1,14 @@
 deploy:
-  image: alpine:latest
+  build:
+  stage: build
+  image: node:18
+  script:
+    - cd landing
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
   script:
     - apt-get update -qy && apt-get install -y lftp
     - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./landing /dev.finby.tech"

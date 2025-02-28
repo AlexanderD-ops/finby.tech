@@ -6,7 +6,6 @@ build:
   stage: build
   image: node:18
   script:
-    - CI=false npm run build
     - cd landing
     - npm install
     - npm run build
@@ -26,6 +25,6 @@ deploy:
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public
-    - lftp -d -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./landing /public_html/dev.finby.tech/"
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./finby /dev.finby.tech/"
   only:
-    - dev
+    - main

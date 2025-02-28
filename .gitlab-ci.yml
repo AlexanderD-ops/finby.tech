@@ -25,6 +25,6 @@ deploy:
     - apt-get update -qy
     - apt-get install -y lftp
     - ls -la landing/public
-    - lftp -d -c "set ftp:passive-mode true; open -u $FTP_USER,$FTP_PASS $FTP_HOST; ls"
+    - lftp -c "set ftp:ssl-allow no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./landing /public_html/dev.finby.tech/"
   only:
     - main

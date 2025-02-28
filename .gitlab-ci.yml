@@ -28,4 +28,4 @@ deploy:
     - ls -la landing/public
     - lftp -d -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./landing /public_html/dev.finby.tech/"
   only:
-    - main
+    - dev

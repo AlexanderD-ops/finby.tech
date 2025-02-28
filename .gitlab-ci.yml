@@ -1,5 +1,5 @@
 deploy:
-  image: curlimages/curl:latest
+  image: alpine:latest
   script:
     - apt-get update -qy && apt-get install -y lftp
     - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./landing /dev.finby.tech"

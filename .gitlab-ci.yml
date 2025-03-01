@@ -6,7 +6,8 @@ build:
   stage: build
   image: node:18
   script:
-    - cd main
+    - git clone git@gitlab.com:@AlexBHVA/repo.git
+    - cd repo
     - npm install
     - npm run build
   artifacts:
@@ -24,7 +25,7 @@ deploy:
     - echo "Testing FTP connection..."
     - apt-get update -qy
     - apt-get install -y lftp
-    - ls -la main
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./main /public_html/dev.finby.tech/"
+    - ls -la repo
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./repo /dev.finby.tech/"
   only:
     - main

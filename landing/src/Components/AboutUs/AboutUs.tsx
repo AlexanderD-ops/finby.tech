@@ -11,6 +11,7 @@ const useStyles = makeStyles(() => ({
     container: {
         marginTop: '80px',
         marginBottom: '80px',
+        maxWidth: '1050px !important',
     },
     title: {
         fontSize: '72px',
@@ -38,21 +39,67 @@ const useStyles = makeStyles(() => ({
             marginBottom: '20px',
         },
     },
+    introBlock: {
+        position: 'relative',
+        minWidth: '480px',
+        maxWidth: '100%',
+        width: 'auto',
+        height: '200px',
+        background: 'radial-gradient(66.71% 66.71% at 50% 50%, #EDF4FF 0%, #FFFFFF 100%)',
+        boxShadow: '4px 5px 6px rgba(0, 0, 0, 0.05)',
+        borderRadius: '25px',
+        padding: '32px',
+        marginBottom: '40px',
+        overflow: 'hidden',
+        '& p': {
+            fontSize: '18px',
+            lineHeight: '1.5',
+            margin: 0,
+            color: '#000',
+            '&:first-of-type': {
+                marginBottom: '20px',
+            }
+        },
+        '& strong': {
+            fontWeight: 'bold'
+        }
+    },
     introImage: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        height: '100%',
         '& img': {
             width: '100%',
             borderRadius: '25px',
+            display: 'block',
+            marginLeft: 'auto',
+            marginBottom: '40px'
         },
     },
     partnersSection: {
         marginBottom: '80px',
+        background: '#F7FAFF',
+        padding: '40px',
+        borderRadius: '0',
+        marginLeft: 'calc(-50vw + 50%)',
+        marginRight: 'calc(-50vw + 50%)',
+        width: '100vw',
+        '& > h2': {
+            maxWidth: '1050px',
+            margin: '0 auto 40px',
+        },
+        '& > div': {
+            maxWidth: '1050px',
+            margin: '0 auto',
+        }
     },
     sectionTitle: {
         fontSize: '42px',
         fontWeight: '700',
         marginBottom: '40px',
         fontFamily: 'Oswald',
-        color: '#1A2024',
+        color: '#0D2C4A',
+        textAlign: 'center',
     },
     partnerCard: {
         display: 'flex',
@@ -71,41 +118,87 @@ const useStyles = makeStyles(() => ({
     },
     offerSection: {
         marginBottom: '80px',
+        '& > h2': {
+            color: '#000000',
+            textAlign: 'left',
+            maxWidth: '1050px',
+            margin: '0 auto 40px',
+        }
     },
     offerItem: {
         marginBottom: '30px',
-        '& h3': {
-            fontSize: '24px',
-            fontWeight: '700',
-            marginBottom: '10px',
-            fontFamily: 'Oswald',
-        },
+        margin: '0 auto',
+        position: 'relative',
+        minWidth: '480px',
+        maxWidth: '100%',
+        width: 'auto',
+        background: 'radial-gradient(66.71% 66.71% at 50% 50%, #EDF4FF 0%, #FFFFFF 100%)',
+        boxShadow: '4px 5px 6px rgba(0, 0, 0, 0.05)',
+        borderRadius: '25px',
+        padding: '32px',
+        overflow: 'hidden',
         '& p': {
-            fontSize: '16px',
+            fontSize: '28px',
             lineHeight: '1.5',
-            color: '#4A4A4A',
+            color: '#000000',
+            fontFamily: 'Oswald',
+            margin: 0,
+            '& strong': {
+                fontWeight: '700',
+            }
         },
     },
     techExpertise: {
         textAlign: 'center',
         marginBottom: '80px',
-        '& p': {
-            fontSize: '16px',
+        background: '#F7FAFF',
+        padding: '40px',
+        borderRadius: '0',
+        marginLeft: 'calc(-50vw + 50%)',
+        marginRight: 'calc(-50vw + 50%)',
+        width: '100vw',
+        '& > h2': {
+            maxWidth: '1050px',
+            margin: '0 auto 40px',
+        },
+        '& > p': {
+            fontSize: '18px',
             lineHeight: '1.5',
             maxWidth: '800px',
             margin: '0 auto 40px',
+            '& strong': {
+                fontWeight: 'bold'
+            }
         },
+        '& > div': {
+            maxWidth: '1050px',
+            margin: '0 auto',
+        }
     },
     advantages: {
-        background: '#F8F9FA',
-        padding: '40px',
+        background: 'radial-gradient(66.71% 66.71% at 50% 50%, #EDF4FF 0%, #FFFFFF 100%)',
+        boxShadow: '4px 5px 6px rgba(0, 0, 0, 0.05)',
+        padding: '32px',
         borderRadius: '25px',
+        '& > h2': {
+            fontFamily: 'Open Sans',
+            fontWeight: 800,
+            fontSize: '31px',
+            lineHeight: '34px',
+            letterSpacing: '0.2px',
+            marginBottom: '40px',
+            color: '#000000',
+            textAlign: 'left',
+        },
         '& ul': {
             listStyle: 'none',
             padding: 0,
             '& li': {
-                fontSize: '16px',
-                lineHeight: '1.5',
+                fontFamily: 'Oswald',
+                fontWeight: 300,
+                fontSize: '18px',
+                lineHeight: '34px',
+                letterSpacing: '0.2px',
                 marginBottom: '15px',
                 paddingLeft: '20px',
                 position: 'relative',
@@ -113,7 +206,7 @@ const useStyles = makeStyles(() => ({
                     content: '"•"',
                     position: 'absolute',
                     left: 0,
-                    color: '#1970B5',
+                    color: '#000000',
                 },
             },
         },
@@ -128,8 +221,10 @@ export const AboutUs: React.FC = () => {
             <div className={classes.introSection}>
                 <div className={classes.introText}>
                     <h1 className={classes.title}>Кто мы?</h1>
-                    <p>ФИНАМ ТОКЕНЫ – это инновационная инвестиционная платформа, созданная в 2024 году путем стратегического партнерства между ведущим инвестиционным холдингом ФИНАМ и МТБанком.</p>
-                    <p>Наша миссия – сделать современные инвестиционные возможности доступными для каждого через технологию токенизации активов.</p>
+                    <div className={classes.introBlock}>
+                        <p><strong>ФИНАМ ТОКЕНЫ – это инновационная инвестиционная платформа, созданная в 2024 году путем стратегического партнерства между ведущим инвестиционным холдингом ФИНАМ и МТБанком.</strong></p>
+                        <p>Наша миссия – сделать современные инвестиционные возможности доступными для каждого через технологию токенизации активов.</p>
+                    </div>
                 </div>
                 <div className={classes.introImage}>
                     <img src={officeImage} alt="Office" />
@@ -155,22 +250,19 @@ export const AboutUs: React.FC = () => {
             <div className={classes.offerSection}>
                 <h2 className={classes.sectionTitle}>Что мы предлагаем</h2>
                 <div className={classes.offerItem}>
-                    <h3>Токенизация активов</h3>
-                    <p>преобразование прав на реальные активы в цифровые токены, делая инвестиции более доступными и прозрачными</p>
+                    <p><strong>Токенизация активов</strong> - преобразование прав на реальные активы в цифровые токены, делая инвестиции более доступными и прозрачными</p>
                 </div>
                 <div className={classes.offerItem}>
-                    <h3>Инвестиционные токены</h3>
-                    <p>цифровые ценные бумаги нового поколения, обеспеченные реальными активами</p>
+                    <p><strong>Инвестиционные токены</strong> - цифровые ценные бумаги нового поколения, обеспеченные реальными активами</p>
                 </div>
                 <div className={classes.offerItem}>
-                    <h3>Токенизированные стратегии</h3>
-                    <p>доступ к профессиональному управлению активами через покупку токенов инвестиционных стратегий</p>
+                    <p><strong>Токенизированные стратегии</strong> - доступ к профессиональному управлению активами через покупку токенов инвестиционных стратегий</p>
                 </div>
             </div>
 
             <div className={classes.techExpertise}>
                 <h2 className={classes.sectionTitle}>Технологическая экспертиза</h2>
-                <p>Наши технологические решения разработаны при поддержке ведущих компаний-резидентов Парка высоких технологий Республики Беларусь:</p>
+                <p><strong>Наши технологические решения разработаны при поддержке ведущих компаний-резидентов Парка высоких технологий Республики Беларусь:</strong></p>
                 <div className={classes.partnerCard}>
                     <img src={softClubLogo} alt="SoftClub" className={classes.partnerLogo} />
                     <p className={classes.partnerDescription}>

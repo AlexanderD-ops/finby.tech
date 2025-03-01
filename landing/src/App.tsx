@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Header } from './components/Header';
+import { Header } from './components/Header/Header';
 
 // Импорт страниц
 import HomePage from './pages/home';

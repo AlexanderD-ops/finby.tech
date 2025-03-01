@@ -5,16 +5,8 @@ stages:
 build:
   stage: build
   image: node:18
-  before_script:
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-  - chmod 600 ~/.ssh/id_ed25519
-  - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-  - eval "$(ssh-agent -s)"
-  - ssh-add ~/.ssh/id_ed25519
   script:
-    - git clone git@gitlab.com:AlexBHVA/repo.git
-    - cd repo
+    - cd landing
     - npm install
     - npm run build
   artifacts:
@@ -32,7 +24,7 @@ deploy:
     - echo "Testing FTP connection..."
     - apt-get update -qy
     - apt-get install -y lftp
-    - ls -la repo
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./repo /dev.finby.tech/"
+    - ls -la /dev.finby.tech
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./dev.finby.tech /dev.finby.tech"
   only:
     - main

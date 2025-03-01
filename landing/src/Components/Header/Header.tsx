@@ -3,6 +3,7 @@ import { Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { NavLink } from 'react-router-dom';
 import { LoginModal } from '../LoginModal/LoginModal';
+import { RegisterModal } from '../RegisterModal/RegisterModal';
 import logo from '../../assets/images/finamlogo.png';
 import vector from '../../assets/images/Vector.png';
 
@@ -96,6 +97,17 @@ const useStyles = makeStyles({
 export const Header: React.FC = () => {
     const classes = useStyles();
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+    const handleLoginClick = () => {
+        setIsRegisterModalOpen(false);
+        setIsLoginModalOpen(true);
+    };
+
+    const handleRegisterClick = () => {
+        setIsLoginModalOpen(false);
+        setIsRegisterModalOpen(true);
+    };
 
     return (
         <>
@@ -112,12 +124,12 @@ export const Header: React.FC = () => {
                             <NavLink to="/about" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>О нас</NavLink>
                         </div>
                         <div className={classes.authBtns}>
-                            <div className={classes.buttonSignIn} onClick={() => setIsLoginModalOpen(true)}>
+                            <div className={classes.buttonSignIn} onClick={handleLoginClick}>
                                 Войти
                             </div>
-                            <NavLink to="/register" className={classes.buttonSignUp}>
+                            <div className={classes.buttonSignUp} onClick={handleRegisterClick}>
                                 Регистрация <img src={vector} alt="vector" />
-                            </NavLink>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,6 +137,10 @@ export const Header: React.FC = () => {
             <LoginModal
                 open={isLoginModalOpen}
                 onClose={() => setIsLoginModalOpen(false)}
+            />
+            <RegisterModal
+                open={isRegisterModalOpen}
+                onClose={() => setIsRegisterModalOpen(false)}
             />
         </>
     );

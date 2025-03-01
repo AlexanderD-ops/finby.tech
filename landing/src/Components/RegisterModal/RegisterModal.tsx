@@ -116,11 +116,17 @@ const useStyles = makeStyles(() => ({
 interface RegisterModalProps {
     open: boolean;
     onClose: () => void;
+    onLoginClick: () => void;
 }
 
-export const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }) => {
+export const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose, onLoginClick }) => {
     const classes = useStyles();
     const [isAgreed, setIsAgreed] = useState(false);
+
+    const handleLoginClick = () => {
+        onClose();
+        onLoginClick();
+    };
 
     return (
         <Modal
@@ -202,7 +208,7 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }) =
                 </form>
                 <Typography
                     className={classes.register}
-                    onClick={onClose}
+                    onClick={handleLoginClick}
                 >
                     Войти
                 </Typography>

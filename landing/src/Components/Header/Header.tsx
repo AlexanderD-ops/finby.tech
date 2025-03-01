@@ -137,10 +137,12 @@ export const Header: React.FC = () => {
             <LoginModal
                 open={isLoginModalOpen}
                 onClose={() => setIsLoginModalOpen(false)}
+                onRegisterClick={handleRegisterClick}
             />
             <RegisterModal
                 open={isRegisterModalOpen}
                 onClose={() => setIsRegisterModalOpen(false)}
+                onLoginClick={handleLoginClick}
             />
         </>
     );

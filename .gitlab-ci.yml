@@ -13,9 +13,6 @@ build:
    - eval "$(ssh-agent -s)"
    - ssh-add ~/.ssh/id_ed25519
   script:
-    - mkdir -p ~/.ssh
-    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-    - git clone git@gitlab.com:AlexBHVA/repo.git
     - git clone git@gitlab.com:AlexBHVA/repo.git
     - cd repo
     - npm install

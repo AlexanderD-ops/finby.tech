@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { NavLink } from 'react-router-dom';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { RegisterModal } from '../RegisterModal/RegisterModal';
+import { ResetPasswordModal } from '../ResetPasswordModal/ResetPasswordModal';
 import logo from '../../assets/images/finamlogo.png';
 import vector from '../../assets/images/Vector.png';
 
@@ -98,15 +99,24 @@ export const Header: React.FC = () => {
     const classes = useStyles();
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] = useState(false);
 
     const handleLoginClick = () => {
         setIsRegisterModalOpen(false);
+        setIsResetPasswordModalOpen(false);
         setIsLoginModalOpen(true);
     };
 
     const handleRegisterClick = () => {
         setIsLoginModalOpen(false);
+        setIsResetPasswordModalOpen(false);
         setIsRegisterModalOpen(true);
+    };
+
+    const handleResetPasswordClick = () => {
+        setIsLoginModalOpen(false);
+        setIsRegisterModalOpen(false);
+        setIsResetPasswordModalOpen(true);
     };
 
     return (
@@ -138,10 +148,16 @@ export const Header: React.FC = () => {
                 open={isLoginModalOpen}
                 onClose={() => setIsLoginModalOpen(false)}
                 onRegisterClick={handleRegisterClick}
+                onResetPasswordClick={handleResetPasswordClick}
             />
             <RegisterModal
                 open={isRegisterModalOpen}
                 onClose={() => setIsRegisterModalOpen(false)}
+                onLoginClick={handleLoginClick}
+            />
+            <ResetPasswordModal
+                open={isResetPasswordModalOpen}
+                onClose={() => setIsResetPasswordModalOpen(false)}
                 onLoginClick={handleLoginClick}
             />
         </>

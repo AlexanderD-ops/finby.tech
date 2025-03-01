@@ -61,34 +61,7 @@ const useStyles = makeStyles(() => ({
             },
         },
     },
-    loginButton: {
-        background: '#FFFFFF',
-        color: '#1970B5',
-        borderRadius: '50px',
-        padding: '12px',
-        height: '48px',
-        fontSize: '16px',
-        fontWeight: 500,
-        textTransform: 'none',
-        marginTop: '10px',
-        border: '3px solid #1970B5',
-        '&:hover': {
-            background: 'rgba(25, 112, 181, 0.05)',
-            borderWidth: '3px',
-        },
-    },
-    forgotPassword: {
-        color: '#8F8F8F',
-        textAlign: 'left',
-        textDecoration: 'none',
-        fontSize: '16px',
-        cursor: 'pointer',
-        marginTop: '10px',
-        '&:hover': {
-            textDecoration: 'underline',
-        },
-    },
-    register: {
+    backToLogin: {
         color: '#1970B5',
         textAlign: 'center',
         textDecoration: 'none',
@@ -99,31 +72,26 @@ const useStyles = makeStyles(() => ({
             textDecoration: 'underline',
         },
     },
+    description: {
+        color: '#1970B5',
+        textAlign: 'center',
+        fontSize: '16px',
+        marginBottom: '20px',
+    }
 }));
 
-interface LoginModalProps {
+interface ResetPasswordModalProps {
     open: boolean;
     onClose: () => void;
-    onRegisterClick: () => void;
-    onResetPasswordClick: () => void;
+    onLoginClick: () => void;
 }
 
-export const LoginModal: React.FC<LoginModalProps> = ({ 
-    open, 
-    onClose, 
-    onRegisterClick,
-    onResetPasswordClick 
-}) => {
+export const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({ open, onClose, onLoginClick }) => {
     const classes = useStyles();
 
-    const handleRegisterClick = () => {
+    const handleLoginClick = () => {
         onClose();
-        onRegisterClick();
-    };
-
-    const handleResetPasswordClick = () => {
-        onClose();
-        onResetPasswordClick();
+        onLoginClick();
     };
 
     return (
@@ -134,6 +102,12 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         >
             <Box className={classes.modalContent}>
                 <img src={logo} alt="Финам Токены" className={classes.logo} />
+                <Typography 
+                    className={classes.description}
+                    sx={{ marginBottom: '20px !important' }}
+                >
+                    Для того что бы создать новый пароль введите адрес электронной почты привязанный к вашей учетной записи и мы вышлем на него дальнейшие инструкции
+                </Typography>
                 <form className={classes.form}>
                     <div>
                         <Typography className={classes.inputLabel}>
@@ -145,23 +119,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                             className={classes.textField}
                         />
                     </div>
-                    <div>
-                        <Typography className={classes.inputLabel}>
-                            Пароль
-                        </Typography>
-                        <TextField
-                            fullWidth
-                            variant="outlined"
-                            type="password"
-                            className={classes.textField}
-                        />
-                    </div>
-                    <Typography
-                        className={classes.forgotPassword}
-                        onClick={handleResetPasswordClick}
-                    >
-                        Забыли пароль ?
-                    </Typography>
                     <Button
                         fullWidth
                         variant="outlined"
@@ -183,15 +140,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                             }
                         }}
                     >
-                        Войти
+                        Отправить
                     </Button>
                 </form>
-                <Typography
-                    className={classes.register}
-                    onClick={handleRegisterClick}
-                >
-                    Регистрация
-                </Typography>
             </Box>
         </Modal>
     );

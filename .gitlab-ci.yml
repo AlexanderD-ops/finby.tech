@@ -4,7 +4,7 @@ stages:
 
 install_dependencies:
   stage: install
-  image: node:18
+  image: node:16
   script:
     - cd landing
     - npm install
@@ -14,7 +14,7 @@ install_dependencies:
 
 build:
   stage: build
-  image: node:18
+  image: node:16
   script:
     - npm run build
   artifacts:

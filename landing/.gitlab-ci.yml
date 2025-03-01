@@ -14,7 +14,7 @@ install_dependencies:
 
 build:
   stage: build
-  image: node:16
+  image: node:18
   script:
     - npm run build
   artifacts:

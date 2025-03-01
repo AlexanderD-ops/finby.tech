@@ -6,7 +6,7 @@ build:
   stage: build
   image: node:18
   script:
-    - cd landing
+    - cd dev.finby.tech
     - npm install
     - npm run build
   artifacts:

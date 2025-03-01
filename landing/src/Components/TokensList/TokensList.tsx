@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Box, 
   Table,
@@ -10,10 +10,18 @@ import {
   Paper,
   IconButton,
   Chip,
-  Typography
+  Typography,
+  TextField,
+  InputAdornment,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Container
 } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Token {
   id: number;
@@ -92,142 +100,289 @@ const getTagColor = (tag: string): string => {
   }
 };
 
+const FILTERS = [
+  "Все инвест-идеи",
+  "Восстановление российского рынка",
+  "Затаившийся дракон",
+  "Топ-15 акций в кризис",
+  "Топ акций под дивиденды"
+];
+
 export const TokensList = () => {
-  return (
-    <TableContainer component={Paper} sx={{ 
-      backgroundColor: '#fff',
-      borderRadius: 2, 
-      mt: 3,
-      boxShadow: 'none',
-      borderTop: '1px solid #E5E7EB',
-      borderBottom: '1px solid #E5E7EB',
-      '& .MuiTableCell-root': {
-        borderLeft: 'none',
-        borderRight: 'none'
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState<string[]>(["Все инвест-идеи"]);
+
+  const handleFilterChange = (filter: string) => {
+    if (filter === "Все инвест-идеи") {
+      setSelectedFilters(["Все инвест-идеи"]);
+      return;
+    }
+
+    setSelectedFilters(prev => {
+      // Убираем "Все инвест-идеи" если выбран другой фильтр
+      const newFilters = prev.filter(f => f !== "Все инвест-идеи");
+      
+      if (prev.includes(filter)) {
+        return newFilters.filter(f => f !== filter);
+      } else {
+        return [...newFilters, filter];
       }
-    }}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>#</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Название токена</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Инвест-идеи</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Цена</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Динамика роста</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {MOCK_DATA.map((token) => (
-            <TableRow 
-              key={token.id}
-              sx={{ 
-                '&:hover': { backgroundColor: '#EFF6FF' }
-              }}
-            >
-              <TableCell sx={{ color: '#6B7280' }}>{token.id}</TableCell>
-              <TableCell>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <Box 
-                    component="span" 
-                    sx={{ 
-                      width: 32, 
-                      height: 32, 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center',
-                      backgroundColor: '#F3F4F6',
-                      fontSize: '20px'
-                    }}
-                  >
-                    {getTokenIcon(token.id)}
-                  </Box>
-                  <Typography 
-                    variant="body1" 
-                    component="span" 
-                    sx={{ 
-                      fontWeight: 500,
-                      color: '#374151',
-                      fontFamily: 'Oswald'
-                    }}
-                  >
-                    {token.name}
-                  </Typography>
-                </Box>
-              </TableCell>
-              <TableCell>
-                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                  {token.tags.map((tag, index) => (
-                    <Chip
-                      key={`${token.id}-${index}`}
-                      label={tag}
-                      size="small"
-                      sx={{
-                        backgroundColor: getTagColor(tag),
-                        color: 'white',
-                        borderRadius: '16px',
-                        fontSize: '0.75rem',
-                        height: '24px'
-                      }}
-                    />
-                  ))}
-                </Box>
-              </TableCell>
-              <TableCell>
-                <Typography variant="body1" sx={{ color: '#374151' }}>
-                  USD ${token.price.toFixed(2)}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    color: token.change >= 0 ? '#4CAF50' : '#F44336',
-                    fontWeight: 500
-                  }}
-                >
-                  {token.change >= 0 ? '+' : ''}{token.change}%
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Box sx={{ display: 'flex', gap: 1 }}>
+    });
+  };
+
+  const filteredData = MOCK_DATA.filter(token => {
+    const matchesSearch = token.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilters = selectedFilters.includes("Все инвест-идеи") || 
+      token.tags.some(tag => selectedFilters.includes(tag));
+    return matchesSearch && matchesFilters;
+  });
+
+  return (
+    <Container maxWidth="lg">
+      <Box>
+        <Box sx={{ mb: 3 }}>
+          <TextField
+            fullWidth
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder=""
+            variant="standard"
+            hiddenLabel
+            autoComplete="off"
+            inputProps={{
+              autoComplete: 'off',
+              'aria-autocomplete': 'none',
+              spellCheck: 'false'
+            }}
+            sx={{
+              backgroundColor: '#fff',
+              borderRadius: '8px',
+              '& .MuiInput-root': {
+                backgroundColor: '#fff',
+                borderRadius: '8px',
+                borderBottom: '1px solid #E5E7EB',
+                '&:before, &:after': {
+                  display: 'none'
+                },
+                '& input': {
+                  color: '#374151',
+                  padding: '8px 0',
+                  '&::placeholder': {
+                    color: '#374151',
+                    opacity: 1
+                  }
+                }
+              },
+              '& .MuiFormHelperText-root': {
+                display: 'none'
+              }
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: '#6B7280' }} />
+                </InputAdornment>
+              ),
+              endAdornment: searchQuery && (
+                <InputAdornment position="end">
                   <IconButton 
                     size="small" 
+                    onClick={() => setSearchQuery('')}
                     sx={{ 
                       color: '#6B7280',
                       backgroundColor: '#F3F4F6',
-                      width: '32px',
-                      height: '32px',
-                      '&:hover': { 
-                        color: '#374151',
+                      width: '24px',
+                      height: '24px',
+                      mr: 1,
+                      '&:hover': {
                         backgroundColor: '#E5E7EB'
+                      },
+                      '&:focus': {
+                        outline: 'none'
                       }
                     }}
                   >
-                    <ShoppingCartOutlinedIcon sx={{ fontSize: 20 }} />
+                    <CloseIcon sx={{ fontSize: 16 }} />
                   </IconButton>
-                  <IconButton 
-                    size="small"
-                    sx={{ 
-                      color: '#6B7280',
-                      backgroundColor: '#F3F4F6',
-                      width: '32px',
-                      height: '32px',
-                      '&:hover': { 
-                        color: '#374151',
-                        backgroundColor: '#E5E7EB'
-                      }
+                </InputAdornment>
+              )
+            }}
+          />
+        </Box>
+
+        <Typography sx={{ 
+          color: '#9CA3AF',
+          mb: 2,
+          fontWeight: 600,
+          fontSize: '14px'
+        }}>
+          Фильтровать по инвест-идеям
+        </Typography>
+
+        <Box sx={{ mb: 3 }}>
+          <FormGroup row sx={{ gap: 2 }}>
+            {FILTERS.map((filter) => (
+              <FormControlLabel
+                key={filter}
+                control={
+                  <Checkbox
+                    checked={selectedFilters.includes(filter)}
+                    onChange={() => handleFilterChange(filter)}
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#2563EB',
+                      },
                     }}
-                  >
-                    <BookmarkBorderOutlinedIcon sx={{ fontSize: 20 }} />
-                  </IconButton>
-                </Box>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  />
+                }
+                label={filter}
+                sx={{
+                  '& .MuiFormControlLabel-label': {
+                    color: '#374151',
+                    fontSize: '14px'
+                  }
+                }}
+              />
+            ))}
+          </FormGroup>
+        </Box>
+
+        <TableContainer component={Paper} sx={{ 
+          backgroundColor: '#fff',
+          borderRadius: 2, 
+          mt: 3,
+          boxShadow: 'none',
+          borderTop: '1px solid #E5E7EB',
+          borderBottom: '1px solid #E5E7EB',
+          '& .MuiTableCell-root': {
+            borderLeft: 'none',
+            borderRight: 'none'
+          }
+        }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>#</TableCell>
+                <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Название токена</TableCell>
+                <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Инвест-идеи</TableCell>
+                <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Цена</TableCell>
+                <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Динамика роста</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredData.map((token) => (
+                <TableRow 
+                  key={token.id}
+                  sx={{ 
+                    '&:hover': { backgroundColor: '#EFF6FF' }
+                  }}
+                >
+                  <TableCell sx={{ color: '#6B7280' }}>{token.id}</TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box 
+                        component="span" 
+                        sx={{ 
+                          width: 32, 
+                          height: 32, 
+                          borderRadius: '50%', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center',
+                          backgroundColor: '#F3F4F6',
+                          fontSize: '20px'
+                        }}
+                      >
+                        {getTokenIcon(token.id)}
+                      </Box>
+                      <Typography 
+                        variant="body1" 
+                        component="span" 
+                        sx={{ 
+                          fontWeight: 500,
+                          color: '#374151',
+                          fontFamily: 'Oswald'
+                        }}
+                      >
+                        {token.name}
+                      </Typography>
+                    </Box>
+                  </TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                      {token.tags.map((tag, index) => (
+                        <Chip
+                          key={`${token.id}-${index}`}
+                          label={tag}
+                          size="small"
+                          sx={{
+                            backgroundColor: getTagColor(tag),
+                            color: 'white',
+                            borderRadius: '16px',
+                            fontSize: '0.75rem',
+                            height: '24px'
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body1" sx={{ color: '#374151' }}>
+                      USD ${token.price.toFixed(2)}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: token.change >= 0 ? '#4CAF50' : '#F44336',
+                        fontWeight: 500
+                      }}
+                    >
+                      {token.change >= 0 ? '+' : ''}{token.change}%
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                      <IconButton 
+                        size="small" 
+                        sx={{ 
+                          color: '#6B7280',
+                          backgroundColor: '#F3F4F6',
+                          width: '32px',
+                          height: '32px',
+                          '&:hover': { 
+                            color: '#374151',
+                            backgroundColor: '#E5E7EB'
+                          }
+                        }}
+                      >
+                        <ShoppingCartOutlinedIcon sx={{ fontSize: 20 }} />
+                      </IconButton>
+                      <IconButton 
+                        size="small"
+                        sx={{ 
+                          color: '#6B7280',
+                          backgroundColor: '#F3F4F6',
+                          width: '32px',
+                          height: '32px',
+                          '&:hover': { 
+                            color: '#374151',
+                            backgroundColor: '#E5E7EB'
+                          }
+                        }}
+                      >
+                        <BookmarkBorderOutlinedIcon sx={{ fontSize: 20 }} />
+                      </IconButton>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </Container>
   );
 }; 

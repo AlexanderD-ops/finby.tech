@@ -96,7 +96,7 @@ export const TokenPage: React.FC = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h4" sx={{ 
-            fontFamily: 'Oswald', 
+            fontFamily: 'Oswald',
             color: '#000',
             fontSize: '2.5rem',
             fontWeight: 'bold'
@@ -111,15 +111,14 @@ export const TokenPage: React.FC = () => {
           gap: 4,
           mb: 4
         }}>
-          <TokenStats
-            currentPrice={token.currentPrice}
-            targetPrice={token.targetPrice}
-            expirationDate={token.expirationDate}
-            riskLevel={token.riskLevel}
-            returns={token.returns}
-          />
-
           <Box>
+            <TokenStats
+              currentPrice={token.currentPrice}
+              targetPrice={token.targetPrice}
+              expirationDate={token.expirationDate}
+              riskLevel={token.riskLevel}
+              returns={token.returns}
+            />
             <Chip
               label={token.tags[0]}
               sx={{
@@ -128,10 +127,13 @@ export const TokenPage: React.FC = () => {
                 borderRadius: '16px',
                 fontSize: '0.875rem',
                 height: '32px',
-                mb: 3
+                mt: 2,
+                fontFamily: 'Oswald'
               }}
             />
-            
+          </Box>
+
+          <Box>
             <Typography sx={{ 
               color: '#000',
               fontSize: '1rem',
@@ -144,7 +146,8 @@ export const TokenPage: React.FC = () => {
             <Typography sx={{ 
               color: '#000',
               fontWeight: 'medium',
-              mb: 2
+              mb: 2,
+              fontSize: '1.125rem'
             }}>
               Историческая доходность %
             </Typography>
@@ -154,11 +157,13 @@ export const TokenPage: React.FC = () => {
                 <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   <Typography sx={{ 
                     color: getReturnColor(item.value),
-                    fontWeight: 'medium'
+                    fontWeight: 'medium',
                   }}>
                     {item.value >= 0 ? '↑' : '↓'} {Math.abs(item.value)}
                   </Typography>
-                  <Typography sx={{ color: '#6B7280' }}>
+                  <Typography sx={{ 
+                    color: '#6B7280',
+                  }}>
                     {item.period}
                   </Typography>
                 </Box>

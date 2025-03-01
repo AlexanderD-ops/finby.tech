@@ -326,6 +326,7 @@ export const TokensList = () => {
                           size="small"
                           sx={{
                             backgroundColor: getTagColor(tag),
+                            fontFamily: 'Oswald',
                             color: 'white',
                             borderRadius: '16px',
                             fontSize: '0.75rem',

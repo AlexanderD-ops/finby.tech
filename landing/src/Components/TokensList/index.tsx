@@ -92,28 +92,33 @@ const getTagColor = (tag: string): string => {
   }
 };
 
-export const TokensList = () => {
+const TokensList: React.FC = () => {
   return (
-    <TableContainer component={Paper} sx={{ 
-      backgroundColor: '#fff',
-      borderRadius: 2, 
-      mt: 3,
-      boxShadow: 'none',
-      borderTop: '1px solid #E5E7EB',
-      borderBottom: '1px solid #E5E7EB',
-      '& .MuiTableCell-root': {
-        borderLeft: 'none',
-        borderRight: 'none'
-      }
-    }}>
+    <TableContainer component={Paper} sx={{ backgroundColor: 'background.paper', borderRadius: 2, mt: 3 }}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>#</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Название токена</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Инвест-идеи</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Цена</TableCell>
-            <TableCell sx={{ color: '#6B7280', fontWeight: 500 }}>Динамика роста</TableCell>
+            <TableCell>#</TableCell>
+            <TableCell>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                Название токена
+              </Box>
+            </TableCell>
+            <TableCell>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                Инвест-идеи
+              </Box>
+            </TableCell>
+            <TableCell>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                Цена
+              </Box>
+            </TableCell>
+            <TableCell>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                Динамика роста
+              </Box>
+            </TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
@@ -122,10 +127,11 @@ export const TokensList = () => {
             <TableRow 
               key={token.id}
               sx={{ 
-                '&:hover': { backgroundColor: '#EFF6FF' }
+                '&:nth-of-type(even)': { backgroundColor: 'rgba(0, 0, 0, 0.02)' },
+                '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }
               }}
             >
-              <TableCell sx={{ color: '#6B7280' }}>{token.id}</TableCell>
+              <TableCell>{token.id}</TableCell>
               <TableCell>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   <Box 
@@ -137,7 +143,7 @@ export const TokensList = () => {
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
-                      backgroundColor: '#F3F4F6',
+                      backgroundColor: '#f0f0f0',
                       fontSize: '20px'
                     }}
                   >
@@ -148,8 +154,7 @@ export const TokensList = () => {
                     component="span" 
                     sx={{ 
                       fontWeight: 500,
-                      color: '#374151',
-                      fontFamily: 'Oswald'
+                      color: token.id === 2 ? 'primary.main' : 'text.primary'
                     }}
                   >
                     {token.name}
@@ -175,7 +180,7 @@ export const TokensList = () => {
                 </Box>
               </TableCell>
               <TableCell>
-                <Typography variant="body1" sx={{ color: '#374151' }}>
+                <Typography variant="body1">
                   USD ${token.price.toFixed(2)}
                 </Typography>
               </TableCell>
@@ -192,35 +197,11 @@ export const TokensList = () => {
               </TableCell>
               <TableCell>
                 <Box sx={{ display: 'flex', gap: 1 }}>
-                  <IconButton 
-                    size="small" 
-                    sx={{ 
-                      color: '#6B7280',
-                      backgroundColor: '#F3F4F6',
-                      width: '32px',
-                      height: '32px',
-                      '&:hover': { 
-                        color: '#374151',
-                        backgroundColor: '#E5E7EB'
-                      }
-                    }}
-                  >
-                    <ShoppingCartOutlinedIcon sx={{ fontSize: 20 }} />
+                  <IconButton size="small">
+                    <ShoppingCartOutlinedIcon />
                   </IconButton>
-                  <IconButton 
-                    size="small"
-                    sx={{ 
-                      color: '#6B7280',
-                      backgroundColor: '#F3F4F6',
-                      width: '32px',
-                      height: '32px',
-                      '&:hover': { 
-                        color: '#374151',
-                        backgroundColor: '#E5E7EB'
-                      }
-                    }}
-                  >
-                    <BookmarkBorderOutlinedIcon sx={{ fontSize: 20 }} />
+                  <IconButton size="small">
+                    <BookmarkBorderOutlinedIcon />
                   </IconButton>
                 </Box>
               </TableCell>
@@ -230,4 +211,8 @@ export const TokensList = () => {
       </Table>
     </TableContainer>
   );
-}; 
+};
+
+export default TokensList;
+
+export { TokensList } from './TokensList'; 

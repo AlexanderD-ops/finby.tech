@@ -6,10 +6,12 @@ build:
   stage: build
   image: node:18
   before_script:
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+   - mkdir -p ~/.ssh
+   - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+   - chmod 600 ~/.ssh/id_ed25519
+    ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+   - eval "$(ssh-agent -s)"
+   - ssh-add ~/.ssh/id_ed25519
   script:
     - mkdir -p ~/.ssh
     - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts

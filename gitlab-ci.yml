@@ -1,0 +1,30 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: node:18
+  script:
+    - cd main
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+
+deploy:
+  stage: deploy
+  image: debian:latest
+  script:
+    - echo "FTP_USER=bhvaac_0"
+    - echo "FTP_PASS=NBuVsD7LPJkcG9BZ"
+    - echo "FTP_HOST=www200.your-server.de"
+    - echo "FTP_PATH=/public_html/dev.finby.tech"
+    - echo "Testing FTP connection..."
+    - apt-get update -qy
+    - apt-get install -y lftp
+    - ls -la main
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_3,W6mXRq5ZJahs9phF www200.your-server.de; mirror -R ./main /public_html/dev.finby.tech/"
+  only:
+    - main

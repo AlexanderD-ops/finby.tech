@@ -22,6 +22,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 interface Token {
   id: number;
@@ -109,6 +110,7 @@ const FILTERS = [
 ];
 
 export const TokensList = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>(["Все инвест-идеи"]);
 
@@ -128,6 +130,10 @@ export const TokensList = () => {
         return [...newFilters, filter];
       }
     });
+  };
+
+  const handleTokenClick = (tokenId: number) => {
+    navigate(`/tokens/${tokenId}`);
   };
 
   const filteredData = MOCK_DATA.filter(token => {
@@ -274,8 +280,10 @@ export const TokensList = () => {
               {filteredData.map((token) => (
                 <TableRow 
                   key={token.id}
+                  onClick={() => handleTokenClick(token.id)}
                   sx={{ 
-                    '&:hover': { backgroundColor: '#EFF6FF' }
+                    '&:hover': { backgroundColor: '#EFF6FF' },
+                    cursor: 'pointer'
                   }}
                 >
                   <TableCell sx={{ color: '#6B7280' }}>{token.id}</TableCell>

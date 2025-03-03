@@ -7,15 +7,12 @@ stages:
 install:
   stage: install
   script:
-    - cd landing
     - npm ci
-    - ls -la
-    - ls -la node_modules
   artifacts:
     paths:
-      - landing/node_modules/
+      - node_modules/
     expire_in: 1 hour
-
+    
 cache:
   paths:
     - node_modules/
@@ -35,15 +32,12 @@ before_script:
 build:
   stage: build
   script:
-    - cd landing
     - npm run build
     - echo "Checking if build directory exists..."
     - ls -la build
-  dependencies:
-    - install  
   artifacts:
     paths:
-     - build/
+      - build/
 
 deploy:
   stage: deploy

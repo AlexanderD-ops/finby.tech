@@ -28,11 +28,15 @@ const useStyles = makeStyles({
         paddingBottom: '40px',
         display: 'flex',
         alignItems: 'flex-start',
+        transition: 'margin-left 0.3s ease',
     },
-    cardsContainer: { 
+    cardsContainer: {
         display: 'flex',
         transition: 'transform 0.3s ease',
         gap: '18px',
+    },
+    shifted: {
+        transform: 'translateX(-446px)',
     },
     navigationButtons: {
         display: 'flex',
@@ -43,6 +47,7 @@ const useStyles = makeStyles({
         right: '40px',
         transform: 'translateY(-50%)',
         zIndex: 2,
+        pointerEvents: 'none',
     },
     navButton: {
         background: 'rgba(64, 64, 64, 0.8) !important',
@@ -124,6 +129,7 @@ const useStyles = makeStyles({
     sliderWrapper: {
         position: 'relative',
         overflow: 'hidden',
+        transition: 'width 0.3s ease',
     },
     detailsContainer: {
         width: '428px',
@@ -139,12 +145,15 @@ const useStyles = makeStyles({
         transform: 'translateX(0)',
         visibility: 'visible',
     },
+    detailsContainerLast: {
+        left: 'auto',
+        right: '446px',
+    },
     detailsContent: {
         padding: '20px',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        background: '#FFFFFF',
         color: '#000000',
         borderRadius: '25px',
         justifyContent: 'space-between',
@@ -317,7 +326,32 @@ export const TokenStrategyTypes = () => {
     };
 
     const handleCardClick = (index: number) => {
-        setSelectedCard(selectedCard === index ? null : index);
+        // Если кликнули на уже выбранную карточку, закрываем её
+        if (selectedCard === index) {
+            setSelectedCard(null);
+            return;
+        }
+        
+        // Устанавливаем выбранную карточку
+        setSelectedCard(index);
+        
+        // Проверяем, является ли карточка одной из последних
+        // Вычисляем, сколько карточек помещается в видимой области
+        const visibleCards = 3; // Примерное количество видимых карточек
+        
+        // Если карточка находится левее текущего слайда, прокручиваем к ней
+        if (index < currentSlide) {
+            setCurrentSlide(index);
+        } 
+        // Если карточка находится правее видимой области, прокручиваем к ней
+        else if (index >= currentSlide + visibleCards - 1) {
+            // Для последних двух карточек прокручиваем к предпоследней видимой позиции
+            if (index >= strategies.length - 2) {
+                setCurrentSlide(strategies.length - visibleCards);
+            } else {
+                setCurrentSlide(index - visibleCards + 2);
+            }
+        }
     };
 
     return (
@@ -325,8 +359,17 @@ export const TokenStrategyTypes = () => {
             <Container>
                 <div className={classes.title}>Виды токен-стратегий</div>
             </Container>
-            <div className={classes.sliderWrapper}>
-                <div className={classes.sliderContainer}>
+            <div 
+                className={classes.sliderWrapper}
+            >
+                <div 
+                    className={classes.sliderContainer}
+                    style={{ 
+                        marginLeft: selectedCard !== null && selectedCard >= strategies.length - 2 
+                            ? 'calc((100vw - 1200px) / 2 - 428px)' 
+                            : 'calc((100vw - 1200px) / 2)' 
+                    }}
+                >
                     <div 
                         className={classes.cardsContainer}
                         style={{ 

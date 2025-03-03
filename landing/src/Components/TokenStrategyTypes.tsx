@@ -5,6 +5,12 @@ import strategy1 from '../assets/images/TokenStrategyTypes/strategy1.jpg';
 import strategy2 from '../assets/images/TokenStrategyTypes/strategy2.jpg';
 import strategy3 from '../assets/images/TokenStrategyTypes/strategy3.jpg';
 
+const LABELS = {
+    YIELD: 'Ожидаемая доходность:',
+    RELEVANCE: 'Актуальность идеи:',
+    TOKEN_STRATEGY: 'Токен-стратегия:'
+} as const;
+
 const useStyles = makeStyles({
     title: {
         fontSize: '42px',
@@ -126,7 +132,7 @@ const useStyles = makeStyles({
         transition: 'all 0.3s ease',
         visibility: 'hidden',
         flex: 'none',
-        height: '541px',
+        height: '500px',
     },
     detailsContainerActive: {
         opacity: 1,
@@ -134,36 +140,96 @@ const useStyles = makeStyles({
         visibility: 'visible',
     },
     detailsContent: {
-        padding: '30px',
+        padding: '20px',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        background: '#FFFFFF',
+        color: '#000000',
+        borderRadius: '25px',
+        justifyContent: 'space-between',
     },
     detailsTitle: {
-        fontSize: '32px',
+        fontSize: '24px',
         fontWeight: 700,
-        marginBottom: '20px',
+        marginBottom: '10px',
         fontFamily: 'Oswald',
-        color: '#1970B5',
+        color: '#000000',
     },
     detailsDescription: {
-        fontSize: '16px',
-        lineHeight: '24px',
+        fontSize: '14px',
+        lineHeight: '20px',
         color: '#333333',
-        flex: 1,
         overflow: 'auto',
-        marginBottom: '20px',
+        marginBottom: '15px',
+        fontWeight: 700,
+        paddingBottom: '10px',
+    },
+    detailsContentText: {
+        fontSize: '14px',
+        lineHeight: '20px',
+        color: '#333333',
+        marginBottom: '15px',
+        fontFamily: 'Oswald',
+        paddingBottom: '30px',
     },
     detailsInfo: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px',
+        gap: '8px',
+        marginBottom: '20px',
     },
     detailsInfoItem: {
-        fontSize: '16px',
+        fontSize: '14px',
         color: '#666666',
         fontFamily: 'Oswald',
         lineHeight: '1.2',
+    },
+    detailsInfoLabel: {
+        fontWeight: 700,
+        display: 'inline',
+    },
+    tokenBadge: {
+        display: 'inline-block',
+        background: '#1970B5',
+        color: 'white',
+        padding: '5px 15px',
+        borderRadius: '20px',
+        fontSize: '14px',
+        fontWeight: '500',
+        marginTop: '5px',
+    },
+    buttonContainer: {
+        display: 'flex',
+        marginTop: '20px',
+        gap: '10px',
+    },
+    purchaseButton: {
+        background: '#FFFFFF',
+        color: '#1970B5',
+        height: '52px',
+        width: 'calc(100% - 62px)',
+        borderRadius: '15px',
+        fontSize: '16px',
+        fontWeight: '700',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        border: '1px solid #1970B5',
+    },
+    arrowButton: {
+        width: '52px',
+        height: '52px',
+        borderRadius: '15px',
+        border: '1px solid #1970B5',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        color: '#1970B5',
+        fontSize: '20px',
+        background: '#FFFFFF',
     },
 });
 
@@ -176,51 +242,66 @@ export const TokenStrategyTypes = () => {
         {
             title: 'Восстановление российского рынка',
             info: [
-                'Ожидаемая доходность: 20%-50%/год',
-                'Актуальность идеи: 1-3 лет'
+                `${LABELS.YIELD} 20%-50%/год`,
+                `${LABELS.RELEVANCE} 1-3 лет`
             ],
             image: strategy1,
-            description: 'Что общего у всех кризисов? Объединяет все кризисы одно - последующая фаза восстановления рынка. Трендовое восстановление после кризиса - это, как минимум, возврат к долгосрочным средним значениям и как максимум - компенсация временного лага, в течение которого рынок упускает фазу роста.',
+            description: 'Идея получения высокого дохода при умеренном риске на восстановлении фондового рынка России после падения в 2022г.',
+            content: 'Что общего у всех кризисов? Объединяет все кризисы одно - последующая фаза восстановления рынка. Трендовое восстановление после кризиса - это, как минимум, возврат к долгосрочным средним значениям и как максимум - компенсация временного лага, в течение которого рынок упускает фазу роста.',
+            yield: '20%-50%/год',
+            relevance: '1-3 лет',
             tokenStrategy: 'NFR TOKEN'
         },
         {
             title: 'Затаившийся дракон. Китай подготовился к новому скоку Трампа',
             info: [
-                'Ожидаемая доходность: 15%-40%/год',
-                'Актуальность идеи: 2-4 года'
+                `${LABELS.YIELD} 15%-40%/год`,
+                `${LABELS.RELEVANCE} 2-4 года`
             ],
             image: strategy2,
-            description: 'Китайский рынок демонстрирует признаки восстановления после длительного периода спада. Экономические показатели улучшаются, а государственная поддержка создает благоприятные условия для роста.',
+            description: 'Идея получения высокого дохода при умеренном риске на восстановлении китайского рынка.',
+            content: 'Китайский рынок демонстрирует признаки восстановления после длительного периода спада. Экономические показатели улучшаются, а государственная поддержка создает благоприятные условия для роста.',
+            yield: '15%-40%/год',
+            relevance: '2-4 года',
             tokenStrategy: 'CHINA GROWTH TOKEN'
         },
         {
             title: 'Топ-15 акций в кризис',
             info: [
-                'Ожидаемая доходность: 25%-60%/год',
-                'Актуальность идеи: 1-2 года'
+                `${LABELS.YIELD} 25%-60%/год`,
+                `${LABELS.RELEVANCE} 1-2 года`
             ],
             image: strategy3,
-            description: 'Кризис - это не только риски, но и возможности. Мы отобрали 15 компаний, которые имеют сильные фундаментальные показатели и способны не только пережить кризис, но и укрепить свои позиции.',
+            description: 'Идея получения высокого дохода при умеренном риске в период кризиса на глобальных рынках.',
+            content: 'Кризис - это не только риски, но и возможности. Мы отобрали 15 компаний, которые имеют сильные фундаментальные показатели и способны не только пережить кризис, но и укрепить свои позиции.',
+            yield: '25%-60%/год',
+            relevance: '1-2 года',
             tokenStrategy: 'CRISIS OPPORTUNITY TOKEN'
         },
         {
             title: 'Восстановление российского рынка',
             info: [
-                'Ожидаемая доходность: 20%-50%/год',
-                'Актуальность идеи: 1-3 лет'
+                `${LABELS.YIELD} 20%-50%/год`,
+                `${LABELS.RELEVANCE} 1-3 лет`
             ],
             image: strategy1,
-            description: 'Что общего у всех кризисов? Объединяет все кризисы одно - последующая фаза восстановления рынка. Трендовое восстановление после кризиса - это, как минимум, возврат к долгосрочным средним значениям и как максимум - компенсация временного лага, в течение которого рынок упускает фазу роста.',
+            description: 'Идея получения высокого дохода при умеренном риске на восстановлении фондового рынка России после падения в 2022г.',
+            content: 'Что общего у всех кризисов? Объединяет все кризисы одно - последующая фаза восстановления рынка. Трендовое восстановление после кризиса - это, как минимум, возврат к долгосрочным средним значениям и как максимум - компенсация временного лага, в течение которого рынок упускает фазу роста.',
+            yield: '20%-50%/год',
+            relevance: '1-3 лет',
             tokenStrategy: 'NFR TOKEN'
         },
         {
             title: 'Затаившийся дракон. Китай подготовился к новому скоку Трампа',
             info: [
-                'Ожидаемая доходность: 15%-40%/год',
-                'Актуальность идеи: 2-4 года'
+                `${LABELS.YIELD} 15%-40%/год`,
+                `${LABELS.RELEVANCE} 2-4 года`
             ],
             image: strategy2,
-            description: 'Китайский рынок демонстрирует признаки восстановления после длительного периода спада. Экономические показатели улучшаются, а государственная поддержка создает благоприятные условия для роста.',
+            description: 'Идея получения высокого дохода при умеренном риске на восстановлении китайского рынка.',
+            content: 'Китайский рынок демонстрирует признаки восстановления после длительного периода спада. Экономические показатели улучшаются, а государственная поддержка создает благоприятные условия для роста.',
+            yield: '15%-40%/год',
+            relevance: '2-4 года',
             tokenStrategy: 'CHINA GROWTH TOKEN'
         }
     ];
@@ -290,21 +371,36 @@ export const TokenStrategyTypes = () => {
                                 {selectedCard === index && (
                                     <div className={`${classes.detailsContainer} ${classes.detailsContainerActive}`}>
                                         <div className={classes.detailsContent}>
+                                            <div>
                                             <div className={classes.detailsTitle}>
                                                 {strategy.title}
                                             </div>
                                             <div className={classes.detailsDescription}>
                                                 {strategy.description}
                                             </div>
+                                            <div className={classes.detailsContentText}>
+                                                {strategy.content}
+                                            </div>
+                                            </div>
+                                            <div>
                                             <div className={classes.detailsInfo}>
-                                                {strategy.info.map((info, i) => (
-                                                    <div key={i} className={classes.detailsInfoItem}>
-                                                        {info}
-                                                    </div>
-                                                ))}
                                                 <div className={classes.detailsInfoItem}>
-                                                    Токен-стратегия: {strategy.tokenStrategy}
+                                                    <span className={classes.detailsInfoLabel}>{LABELS.YIELD}</span> {strategy.yield}
                                                 </div>
+                                                <div className={classes.detailsInfoItem}>
+                                                    <span className={classes.detailsInfoLabel}>{LABELS.RELEVANCE}</span> {strategy.relevance}
+                                                </div>
+                                                <div className={classes.detailsInfoItem}>
+                                                    <span className={classes.detailsInfoLabel}>{LABELS.TOKEN_STRATEGY}</span> <span className={classes.tokenBadge}>{strategy.tokenStrategy}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className={classes.buttonContainer}>
+                                                <div className={classes.purchaseButton}>
+                                                    Приобрести к подборке
+                                                </div>
+                                                <div className={classes.arrowButton}>→</div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>

@@ -32,9 +32,8 @@ build:
 
 deploy:
   stage: deploy
+  image: lftp
   script:
-    - apt-get update -qy
-    - apt-get install -y lftp
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R --delete ./build $FTP_PATH "
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./build $FTP_PATH "
   only:
     - dev

@@ -23,7 +23,6 @@ before_script:
 build:
   stage: build
   script:
-    - cd landing
     - npm run build
     - echo "Checking if build directory exists..."
     - ls -la build

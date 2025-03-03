@@ -40,6 +40,7 @@ deploy:
     - echo "Testing FTP connection..."
     - apt-get update -qy
     - apt-get install -y lftp
+    - lftp -e "debug; open -u $FTP_USER,$FTP_PASS $FTP_HOST; ls; bye"
     - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -R --delete ./build $FTP_DIRECTORY "
   only:
     - dev

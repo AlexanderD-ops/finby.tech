@@ -29,7 +29,7 @@ deploy:
   stage: deploy
   script:
     - apt-get update -qq && apt-get install -y lftp
-    - cd landing
+    - ls -la /dev.finby.tech
     - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;
         mirror -R --delete ./build $FTP_DIRECTORY
       "

@@ -32,7 +32,9 @@ build:
 
 deploy:
   stage: deploy
+  image: debian:latest
   script:
+    - apt-get update -qy
     - apt-get install -y lftp
     - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./build $FTP_PATH "
   only:

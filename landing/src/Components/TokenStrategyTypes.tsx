@@ -31,7 +31,7 @@ const useStyles = makeStyles({
         justifyContent: 'space-between',
         position: 'absolute',
         top: '50%',
-        left: 'calc((100vw - 1200px) / 2)',
+        left: '40px',
         right: '40px',
         transform: 'translateY(-50%)',
         zIndex: 2,

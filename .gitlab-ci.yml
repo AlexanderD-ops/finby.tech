@@ -39,6 +39,6 @@ deploy:
     - mkdir -p /etc/ssl/certs
     - cp /tmp/server.crt /etc/ssl/certs/server.crt
   script:
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:ca-file /etc/ssl/certs/server.crt; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./landing $FTP_DIR"
+    - lftp -d -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:ca-file /etc/ssl/certs/server.crt; open -u $FTP_USER,$FTP_PASS ftps://$FTP_HOST; mirror -R ./landing $FTP_PATH"
   only:
     - dev

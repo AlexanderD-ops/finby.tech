@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Container } from '@mui/material';
+import { Container, IconButton } from '@mui/material';
 import strategy1 from '../assets/images/TokenStrategyTypes/strategy1.jpg';
 import strategy2 from '../assets/images/TokenStrategyTypes/strategy2.jpg';
 import strategy3 from '../assets/images/TokenStrategyTypes/strategy3.jpg';
@@ -16,14 +16,36 @@ const useStyles = makeStyles({
             lineHeight: '48px',
         },
     },
+    sliderContainer: {
+        position: 'relative',
+        marginLeft: 'calc((100vw - 1200px) / 2)',
+        paddingBottom: '40px',
+    },
     cardsContainer: { 
         display: 'flex',
+        transition: 'transform 0.3s ease',
         gap: '18px',
-        justifyContent: 'center',
-        '@media (max-width: 960px)': {
-            flexDirection: 'column',
-            alignItems: 'center',
+    },
+    navigationButtons: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        top: '50%',
+        left: 'calc((100vw - 1200px) / 2)',
+        right: '40px',
+        transform: 'translateY(-50%)',
+        zIndex: 2,
+    },
+    navButton: {
+        background: 'rgba(64, 64, 64, 0.8) !important',
+        margin: '0 10px !important',
+        pointerEvents: 'auto',
+        '&:hover': {
+            background: 'rgba(64, 64, 64, 0.9) !important',
         },
+    },
+    hiddenButton: {
+        visibility: 'hidden',
     },
     card: {
         position: 'relative',
@@ -91,10 +113,15 @@ const useStyles = makeStyles({
     wrapper: {
         marginBottom: '80px',
     },
+    sliderWrapper: {
+        position: 'relative',
+        overflow: 'hidden',
+    },
 });
 
 export const TokenStrategyTypes = () => {
     const classes = useStyles();
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const strategies = [
         {
@@ -130,39 +157,72 @@ export const TokenStrategyTypes = () => {
         },
     ];
 
+    const handlePrevSlide = () => {
+        setCurrentSlide(prev => Math.max(prev - 1, 0));
+    };
+
+    const handleNextSlide = () => {
+        setCurrentSlide(prev => Math.min(prev + 1, strategies.length - 3));
+    };
+
     return (
         <div className={classes.wrapper}>
             <Container>
                 <div className={classes.title}>Виды токен-стратегий</div>
-                <div className={classes.cardsContainer}>
-                    {strategies.map((strategy, index) => (
-                        <div key={index} className={classes.card}>
-                            <img 
-                                src={strategy.image} 
-                                alt={strategy.title} 
-                                className={classes.cardImage}
-                            />
-                            <div className={classes.cardContent}>
-                                <div className={classes.cardTop}>
-                                    <div className={classes.cardTitle}>
-                                        {strategy.title}
-                                    </div>
-                                    {strategy.info.map((info, i) => (
-                                        <div key={i} className={classes.cardInfo}>
-                                            {info}
+            </Container>
+            <div className={classes.sliderWrapper}>
+                <div className={classes.sliderContainer}>
+                    <div 
+                        className={classes.cardsContainer}
+                        style={{ 
+                            transform: `translateX(${currentSlide * -(428 + 18)}px)`
+                        }}
+                    >
+                        {strategies.map((strategy, index) => (
+                            <div key={index} className={classes.card}>
+                                <img 
+                                    src={strategy.image} 
+                                    alt={strategy.title} 
+                                    className={classes.cardImage}
+                                />
+                                <div className={classes.cardContent}>
+                                    <div className={classes.cardTop}>
+                                        <div className={classes.cardTitle}>
+                                            {strategy.title}
                                         </div>
-                                    ))}
-                                </div>
-                                <div className={classes.cardBottom}>
-                                    <div className={classes.detailsButton}>
-                                        Подробнее
+                                        {strategy.info.map((info, i) => (
+                                            <div key={i} className={classes.cardInfo}>
+                                                {info}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className={classes.cardBottom}>
+                                        <div className={classes.detailsButton}>
+                                            Подробнее
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </Container>
+                <div className={classes.navigationButtons}>
+                    <IconButton 
+                        className={`${classes.navButton} ${currentSlide === 0 ? classes.hiddenButton : ''}`}
+                        onClick={handlePrevSlide}
+                        disabled={currentSlide === 0}
+                    >
+                        ←
+                    </IconButton>
+                    <IconButton 
+                        className={classes.navButton}
+                        onClick={handleNextSlide}
+                        disabled={currentSlide === strategies.length - 3}
+                    >
+                        →
+                    </IconButton>
+                </div>
+            </div>
         </div>
     );
 };

@@ -32,10 +32,12 @@ build:
 
 deploy:
   stage: deploy
-  image: debian:latest
+  image: lftp
   script:
-    - apt-get update -qy
-    - apt-get install -y lftp
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./build $FTP_PATH "
+    - echo "$FTP_SERVER_CERT" > /tmp/server.crt
+    - mkdir -p /etc/ssl/certs
+    - cp /tmp/server.crt /etc/ssl/certs/server.crt
+  script:
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:ca-file /etc/ssl/certs/server.crt; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R ./landing $FTP_DIR"
   only:
     - dev

@@ -39,6 +39,6 @@ deploy:
     - mkdir -p /etc/ssl/certs
     - cp /tmp/server.crt /etc/ssl/certs/server.crt
   script:
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_0,NBuVsD7LPJkcG9BZ www200.your-server.de; mirror -R ./landing $FTP_PATH"
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_0,NBuVsD7LPJkcG9BZ www200.your-server.de; mirror -R ./landing dev.finby.tech"
   only:
     - dev

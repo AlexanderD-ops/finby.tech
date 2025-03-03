@@ -33,7 +33,13 @@ build:
 deploy:
   stage: deploy
   script:
-    - apt-get update -qq && apt-get install -y lftp
+    - echo "FTP_USER=bhvaac_0"
+    - echo "FTP_PASS=NBuVsD7LPJkcG9BZ"
+    - echo "FTP_HOST=www200.your-server.de"
+    - echo "FTP_PATH=/public_html/dev.finby.tech"
+    - echo "Testing FTP connection..."
+    - apt-get update -qy
+    - apt-get install -y lftp
     - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -R --delete ./build $FTP_DIRECTORY "
   only:
     - dev

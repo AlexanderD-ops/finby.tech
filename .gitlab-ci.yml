@@ -1,0 +1,44 @@
+image: node:18
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - landing/node_modules/
+
+variables:
+  CI: "true"
+
+before_script:
+  - cd landing
+  - npm install
+  - echo "Current directory:"
+  - pwd
+  - echo "Listing all files and directories:"
+  - ls -la
+  - find . -type d -print
+
+build:
+  stage: build
+  script:
+    - npm run build
+    - echo "Checking if build directory exists..."
+    - ls -la build
+  artifacts:
+    paths:
+      - landing/build/
+
+deploy:
+  stage: deploy
+  image: debian:latest
+  before_script:
+    - apt-get update -qy && apt-get install -y lftp
+    - echo "$FTP_SERVER_CERT" > /tmp/server.crt
+    - mkdir -p /etc/ssl/certs
+    - cp /tmp/server.crt /etc/ssl/certs/server.crt
+  script:
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_0,NBuVsD7LPJkcG9BZ www200.your-server.de; mirror -R landing/build finby.tech"
+  only:
+    - master

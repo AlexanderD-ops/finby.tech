@@ -19,6 +19,8 @@ build:
   stage: build
   script:
     - npm run build
+    - echo "Checking if build directory exists..."
+    - ls -la build
   artifacts:
     paths:
       - build/
@@ -27,6 +29,7 @@ deploy:
   stage: deploy
   script:
     - apt-get update -qq && apt-get install -y lftp
+    - cd landing
     - lftp -c "
         open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;
         mirror -R --delete ./build $FTP_DIRECTORY

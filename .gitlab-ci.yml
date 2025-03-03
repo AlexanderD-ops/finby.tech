@@ -14,6 +14,11 @@ variables:
 before_script:
   - cd landing
   - npm install
+  - echo "Current directory:"
+  - pwd
+  - echo "Listing all files and directories:"
+  - ls -la
+  - find . -type d -print
 
 build:
   stage: build
@@ -28,9 +33,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - cd landing
     - apt-get update -qq && apt-get install -y lftp
-    - ls -la landing
     - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;
         mirror -R --delete ./build $FTP_DIRECTORY
       "

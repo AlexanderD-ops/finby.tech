@@ -20,6 +20,8 @@ const useStyles = makeStyles({
         position: 'relative',
         marginLeft: 'calc((100vw - 1200px) / 2)',
         paddingBottom: '40px',
+        display: 'flex',
+        alignItems: 'flex-start',
     },
     cardsContainer: { 
         display: 'flex',
@@ -117,11 +119,58 @@ const useStyles = makeStyles({
         position: 'relative',
         overflow: 'hidden',
     },
+    detailsContainer: {
+        width: '428px',
+        opacity: 0,
+        transform: 'translateX(-20px)',
+        transition: 'all 0.3s ease',
+        visibility: 'hidden',
+        flex: 'none',
+        height: '541px',
+    },
+    detailsContainerActive: {
+        opacity: 1,
+        transform: 'translateX(0)',
+        visibility: 'visible',
+    },
+    detailsContent: {
+        padding: '30px',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    detailsTitle: {
+        fontSize: '32px',
+        fontWeight: 700,
+        marginBottom: '20px',
+        fontFamily: 'Oswald',
+        color: '#1970B5',
+    },
+    detailsDescription: {
+        fontSize: '16px',
+        lineHeight: '24px',
+        color: '#333333',
+        flex: 1,
+        overflow: 'auto',
+        marginBottom: '20px',
+    },
+    detailsInfo: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+    },
+    detailsInfoItem: {
+        fontSize: '16px',
+        color: '#666666',
+        fontFamily: 'Oswald',
+        lineHeight: '1.2',
+    },
 });
 
 export const TokenStrategyTypes = () => {
     const classes = useStyles();
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
     const strategies = [
         {
@@ -130,17 +179,29 @@ export const TokenStrategyTypes = () => {
                 'Ожидаемая доходность: 20%-50%/год',
                 'Актуальность идеи: 1-3 лет'
             ],
-            image: strategy1
+            image: strategy1,
+            description: 'Что общего у всех кризисов? Объединяет все кризисы одно - последующая фаза восстановления рынка. Трендовое восстановление после кризиса - это, как минимум, возврат к долгосрочным средним значениям и как максимум - компенсация временного лага, в течение которого рынок упускает фазу роста.',
+            tokenStrategy: 'NFR TOKEN'
         },
         {
             title: 'Затаившийся дракон. Китай подготовился к новому скоку Трампа',
-            info: [],
-            image: strategy2
+            info: [
+                'Ожидаемая доходность: 15%-40%/год',
+                'Актуальность идеи: 2-4 года'
+            ],
+            image: strategy2,
+            description: 'Китайский рынок демонстрирует признаки восстановления после длительного периода спада. Экономические показатели улучшаются, а государственная поддержка создает благоприятные условия для роста.',
+            tokenStrategy: 'CHINA GROWTH TOKEN'
         },
         {
             title: 'Топ-15 акций в кризис',
-            info: [],
-            image: strategy3
+            info: [
+                'Ожидаемая доходность: 25%-60%/год',
+                'Актуальность идеи: 1-2 года'
+            ],
+            image: strategy3,
+            description: 'Кризис - это не только риски, но и возможности. Мы отобрали 15 компаний, которые имеют сильные фундаментальные показатели и способны не только пережить кризис, но и укрепить свои позиции.',
+            tokenStrategy: 'CRISIS OPPORTUNITY TOKEN'
         },
         {
             title: 'Восстановление российского рынка',
@@ -148,21 +209,34 @@ export const TokenStrategyTypes = () => {
                 'Ожидаемая доходность: 20%-50%/год',
                 'Актуальность идеи: 1-3 лет'
             ],
-            image: strategy1
+            image: strategy1,
+            description: 'Что общего у всех кризисов? Объединяет все кризисы одно - последующая фаза восстановления рынка. Трендовое восстановление после кризиса - это, как минимум, возврат к долгосрочным средним значениям и как максимум - компенсация временного лага, в течение которого рынок упускает фазу роста.',
+            tokenStrategy: 'NFR TOKEN'
         },
         {
             title: 'Затаившийся дракон. Китай подготовился к новому скоку Трампа',
-            info: [],
-            image: strategy2
-        },
+            info: [
+                'Ожидаемая доходность: 15%-40%/год',
+                'Актуальность идеи: 2-4 года'
+            ],
+            image: strategy2,
+            description: 'Китайский рынок демонстрирует признаки восстановления после длительного периода спада. Экономические показатели улучшаются, а государственная поддержка создает благоприятные условия для роста.',
+            tokenStrategy: 'CHINA GROWTH TOKEN'
+        }
     ];
 
     const handlePrevSlide = () => {
         setCurrentSlide(prev => Math.max(prev - 1, 0));
+        setSelectedCard(null);
     };
 
     const handleNextSlide = () => {
         setCurrentSlide(prev => Math.min(prev + 1, strategies.length - 3));
+        setSelectedCard(null);
+    };
+
+    const handleCardClick = (index: number) => {
+        setSelectedCard(selectedCard === index ? null : index);
     };
 
     return (
@@ -179,30 +253,63 @@ export const TokenStrategyTypes = () => {
                         }}
                     >
                         {strategies.map((strategy, index) => (
-                            <div key={index} className={classes.card}>
-                                <img 
-                                    src={strategy.image} 
-                                    alt={strategy.title} 
-                                    className={classes.cardImage}
-                                />
-                                <div className={classes.cardContent}>
-                                    <div className={classes.cardTop}>
-                                        <div className={classes.cardTitle}>
-                                            {strategy.title}
-                                        </div>
-                                        {strategy.info.map((info, i) => (
-                                            <div key={i} className={classes.cardInfo}>
-                                                {info}
+                            <React.Fragment key={index}>
+                                <div 
+                                    className={classes.card}
+                                    onClick={() => handleCardClick(index)}
+                                >
+                                    <img 
+                                        src={strategy.image} 
+                                        alt={strategy.title} 
+                                        className={classes.cardImage}
+                                    />
+                                    <div className={classes.cardContent}>
+                                        <div className={classes.cardTop}>
+                                            <div className={classes.cardTitle}>
+                                                {strategy.title}
                                             </div>
-                                        ))}
-                                    </div>
-                                    <div className={classes.cardBottom}>
-                                        <div className={classes.detailsButton}>
-                                            Подробнее
+                                            {strategy.info.map((info, i) => (
+                                                <div key={i} className={classes.cardInfo}>
+                                                    {info}
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className={classes.cardBottom}>
+                                            <div 
+                                                className={classes.detailsButton}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleCardClick(index);
+                                                }}
+                                            >
+                                                Подробнее
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                {selectedCard === index && (
+                                    <div className={`${classes.detailsContainer} ${classes.detailsContainerActive}`}>
+                                        <div className={classes.detailsContent}>
+                                            <div className={classes.detailsTitle}>
+                                                {strategy.title}
+                                            </div>
+                                            <div className={classes.detailsDescription}>
+                                                {strategy.description}
+                                            </div>
+                                            <div className={classes.detailsInfo}>
+                                                {strategy.info.map((info, i) => (
+                                                    <div key={i} className={classes.detailsInfoItem}>
+                                                        {info}
+                                                    </div>
+                                                ))}
+                                                <div className={classes.detailsInfoItem}>
+                                                    Токен-стратегия: {strategy.tokenStrategy}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </React.Fragment>
                         ))}
                     </div>
                 </div>

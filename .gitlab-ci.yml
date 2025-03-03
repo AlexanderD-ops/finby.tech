@@ -12,6 +12,7 @@ variables:
   CI: "true"
 
 before_script:
+  - cd landing
   - npm install
 
 build:

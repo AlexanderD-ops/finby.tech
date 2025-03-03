@@ -4,18 +4,9 @@ stages:
   - build
   - deploy
 
-install:
-  stage: install
-  script:
-    - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 hour
-    
 cache:
   paths:
-    - node_modules/
+    - landing/node_modules/
 
 variables:
   CI: "true"
@@ -32,12 +23,13 @@ before_script:
 build:
   stage: build
   script:
+    - cd landing
     - npm run build
     - echo "Checking if build directory exists..."
     - ls -la build
   artifacts:
     paths:
-      - build/
+      - landing/build/
 
 deploy:
   stage: deploy
@@ -48,6 +40,6 @@ deploy:
     - mkdir -p /etc/ssl/certs
     - cp /tmp/server.crt /etc/ssl/certs/server.crt
   script:
-    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_0,NBuVsD7LPJkcG9BZ www200.your-server.de; mirror -R ./landing dev.finby.tech"
+    - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u bhvaac_0,NBuVsD7LPJkcG9BZ www200.your-server.de; mirror -R landing/build /public_html/dev.finby.tech"
   only:
     - dev

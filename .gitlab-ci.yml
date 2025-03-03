@@ -28,6 +28,7 @@ build:
 deploy:
   stage: deploy
   script:
+    - cd landing
     - apt-get update -qq && apt-get install -y lftp
     - ls -la landing
     - lftp -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;

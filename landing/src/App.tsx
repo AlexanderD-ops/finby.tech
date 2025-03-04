@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Header } from './components/Header';
+import { Header } from './components/Header/Header';
 
 // Импорт страниц
 import HomePage from './pages/home';
 import TokensPage from './pages/tokens';
+import { TokenPage } from './pages/tokens/[id]';
 import InstructionPage from './pages/instruction';
 import AboutPage from './pages/about';
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tokens" element={<TokensPage />} />
+          <Route path="/tokens/:id" element={<TokenPage />} />
           <Route path="/instruction" element={<InstructionPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>

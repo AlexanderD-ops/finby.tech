@@ -14,8 +14,8 @@ variables:
 before_script:
   - cd landing
   - npm cache clean --force
-  - rm -rf node_modules package-lock.json
-  - npm install
+  - rm -rf node_modules/.cache
+  - npm ci
   - echo "Current directory:"
   - pwd
   - echo "Listing all files and directories:"
@@ -28,6 +28,11 @@ build:
     - npm run build
     - echo "Checking if build directory exists..."
     - ls -la build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+        
   artifacts:
     paths:
       - landing/build/

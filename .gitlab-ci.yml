@@ -13,6 +13,8 @@ variables:
 
 before_script:
   - cd landing
+  - npm cache clean --force
+  - rm -rf node_modules package-lock.json
   - npm install
   - echo "Current directory:"
   - pwd

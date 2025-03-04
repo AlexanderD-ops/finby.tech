@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
-import { TokenStats } from '../../components/TokenStats';
+import { TokenStats } from '../../сomponents/TokenStats';
 
 interface Token {
   id: number;

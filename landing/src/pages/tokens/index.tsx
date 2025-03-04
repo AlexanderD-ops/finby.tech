@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Box, Typography } from '@mui/material';
-import { TokensList } from '../../components/TokensList';
+import { TokensList } from '../../сomponents/TokensList';
 
 const TokensPage: React.FC = () => {
   return (

@@ -158,7 +158,6 @@ export const Header: React.FC = () => {
             <ResetPasswordModal
                 open={isResetPasswordModalOpen}
                 onClose={() => setIsResetPasswordModalOpen(false)}
-                onLoginClick={handleLoginClick}
             />
         </>
     );

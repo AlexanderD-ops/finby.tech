@@ -1,5 +1,5 @@
 import React from 'react';
-import { AboutUs } from '../../components/AboutUs';
+import { AboutUs } from '../../сomponents/AboutUs';
 
 const AboutPage: React.FC = () => {
   return <AboutUs />;

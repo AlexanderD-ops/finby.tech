@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Container } from '@mui/material';
-import image1 from '../../static/TokenStrategyBenefits/1.png';
-import image2 from '../../static/TokenStrategyBenefits/2.png';
-import image3 from '../../static/TokenStrategyBenefits/3.png';
-import image4 from '../../static/TokenStrategyBenefits/4.png';
-import image5 from '../../static/TokenStrategyBenefits/5.png';
+import image1 from '../assets/images/TokenStrategyBenefits/1.png';
+import image2 from '../assets/images/TokenStrategyBenefits/2.png';
+import image3 from '../assets/images/TokenStrategyBenefits/3.png';
+import image4 from '../assets/images/TokenStrategyBenefits/4.png';
+import image5 from '../assets/images/TokenStrategyBenefits/5.png';
+import image6 from '../assets/images/TokenStrategyBenefits/6.png';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -19,37 +20,48 @@ const useStyles = makeStyles(() => ({
         fontFamily: 'Oswald',
     },
     container: {
+        marginTop: '80px',
         marginBottom: '80px',
     },
     description: {
-        fontSize: '18px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'stretch',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '20px',
         marginBottom: '25px',
-        gap: '10px',
         '@media (max-width: 960px)': {
-            flexDirection: 'column',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '15px',
         },
-        fontFamily: 'Open sans',
+        '@media (max-width: 480px)': {
+            gap: '10px',
+        },
     },
     descriptiondiv: {
         borderRadius: '25px',
         padding: '24px',
-        flex: 1,
         background: 'radial-gradient(66.71% 66.71% at 50% 50%, #EDF4FF 10%, #FFFFFF 100%)',
         border: '1px solid rgb(26 116 253 / 10%)',
-        //borderImageSource: 'linear-gradient(180deg, #FFFFFF 10%, rgba(26, 116, 253, 0.1) 100%)',
         display: 'flex',
         flexDirection: 'column',
+        gap: '12px',
         justifyContent: 'space-between',
+        minHeight: '160px',
+        '@media (max-width: 960px)': {
+            padding: '20px',
+            gap: '8px',
+        },
     },
     descriptiondivTitle: {
         fontSize: '31px',
         fontWeight: '700',
         lineHeight: '34px',
-        marginBottom: '24px',
+        marginBottom: '6px',
+        fontFamily: 'Oswald',
+        '@media (max-width: 960px)': {
+            fontSize: '22px',
+            lineHeight: '24px',
+            marginBottom: '8px',
+        },
     },
 }));
 
@@ -63,46 +75,39 @@ export const TokenStrategyBenefits = () => {
                 <div className={classes.description}>
                     <div className={classes.descriptiondiv}>
                         <span className={classes.descriptiondivTitle}>Подоходный налог по ставке</span>
-
                         <div>
                             <img src={image1} />
                         </div>
                     </div>
                     <div className={classes.descriptiondiv}>
                         <span className={classes.descriptiondivTitle}>Автоматическая ребалансировка</span>
-
                         <div>
                             <img src={image2} />
                         </div>
                     </div>
                     <div className={classes.descriptiondiv}>
                         <span className={classes.descriptiondivTitle}>Низкие комиссии</span>
-
                         <div>
                             <img src={image3} />
                         </div>
                     </div>
-                </div>
-                <div className={classes.description}>
                     <div className={classes.descriptiondiv}>
-                        <span className={classes.descriptiondivTitle}>Реинвестирование
-                            дивидендов</span>
-
+                        <span className={classes.descriptiondivTitle}>Реинвестирование дивидендов</span>
                         <div>
                             <img src={image4} />
                         </div>
                     </div>
                     <div className={classes.descriptiondiv}>
-                        <span className={classes.descriptiondivTitle}>Низкий
-                            порог входа</span>
-
+                        <span className={classes.descriptiondivTitle}>Низкий порог входа</span>
                         <div>
                             <img src={image5} />
                         </div>
                     </div>
                     <div className={classes.descriptiondiv}>
-
                         <span className={classes.descriptiondivTitle}>Диверсификация</span>
+                        <div>
+                            <img src={image6} />
+                        </div>
                     </div>
                 </div>
             </div>

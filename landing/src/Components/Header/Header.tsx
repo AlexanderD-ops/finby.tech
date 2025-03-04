@@ -2,8 +2,8 @@ import React from 'react';
 import { Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import logo from '../../static/finamlogo.png';
-import vector from '../../static/Vector.png';
+import logo from '../../assets/images/finamlogo.png';
+import vector from '../../assets/images/Vector.png';
 
 const useStyles = makeStyles({
   header: {
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Header = () => {
+export const Header = () => {
   const classes = useStyles();
 
   return (
@@ -102,14 +102,14 @@ const Header = () => {
         </div>
         <div className={classes.linksContainer}>
           <div className={classes.pageLinks}>
-            <NavLink exact to="/" className={classes.link} activeClassName="active">Главная</NavLink>
-            <NavLink to="/link1" className={classes.link} activeClassName="active">Токены</NavLink>
-            <NavLink to="/link2" className={classes.link} activeClassName="active">Инструкция</NavLink>
-            <NavLink to="/link3" className={classes.link} activeClassName="active">О нас</NavLink>
+            <NavLink to="/" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Главная</NavLink>
+            <NavLink to="/tokens" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Токены</NavLink>
+            <NavLink to="/instruction" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>Инструкция</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? `${classes.link} active` : classes.link}>О нас</NavLink>
           </div>
           <div className={classes.authBtns}>
             <NavLink to="/" className={classes.buttonSignIn}>Войти</NavLink>
-            <NavLink className={classes.buttonSignUp}>Регистрация <img src={vector} /></NavLink>
+            <NavLink to="/register" className={classes.buttonSignUp}>Регистрация <img src={vector} alt="vector" /></NavLink>
           </div>
         </div>
       </div>

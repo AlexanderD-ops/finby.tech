@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import okImage from '../../static/Ok.jpg';
-import { WhatIsTokens } from './WhatIsTokens';
-import { TokenStrategyBenefits } from './TokenStrategyBenefits';
-import { TokenStrategyTypes } from './TokenStrategyTypes';
-import { BuyTokens } from './BuyTokens';
-import { WhySelectUs } from './WhySelectUs';
-import Tokens from './Tokens';
+import okImage from '../../assets/images/Ok.jpg';
+import { WhatIsTokens } from '../WhatIsTokens';
+import { TokenStrategyBenefits } from '../TokenStrategyBenefits';
+import { TokenStrategyTypes } from '../TokenStrategyTypes';
+import { BuyTokens } from '../BuyTokens';
+import { WhySelectUs } from '../WhySelectUs';
+import Tokens from '../Tokens';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Home = () => {
+export const Home: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -93,7 +93,7 @@ const Home = () => {
           <div className={classes.footer}>
             <div>Copyright © 2024</div>
             <div>
-              <NavLink exact to="/" className={classes.footerLink}>О сервисе</NavLink>
+              <NavLink to="/" className={classes.footerLink}>О сервисе</NavLink>
               <a href="https://near.org/" target='_blank' className={classes.footerLink} rel="noreferrer">NEAR</a>
               <a target='_blank' className={classes.footerLink} rel="noreferrer"
               href="https://www.finam.ru/landings/open-order-new/?AgencyBackOfficeID=1&agent=46504c8f-c84d-4e01-bef2-b8eef1b51d26" >

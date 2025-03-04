@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Container } from '@mui/material';
-import image1 from '../../static/TokenStrategyTypes/Frame 41.png';
-import image2 from '../../static/TokenStrategyTypes/Frame 38.png';
-import image3 from '../../static/TokenStrategyTypes/Frame 39.png';
-import image4 from '../../static/TokenStrategyTypes/Frame 33.png';
-import image5 from '../../static/TokenStrategyTypes/Group 28.png';
+import image1 from '../assets/images/TokenStrategyTypes/Frame 41.png';
+import image2 from '../assets/images/TokenStrategyTypes/Frame 38.png';
+import image3 from '../assets/images/TokenStrategyTypes/Frame 39.png';
+import image4 from '../assets/images/TokenStrategyTypes/Frame 33.png';
+import image5 from '../assets/images/TokenStrategyTypes/Group 28.png';
 
 const useStyles = makeStyles({
     title: {

@@ -83,16 +83,11 @@ const useStyles = makeStyles(() => ({
 interface ResetPasswordModalProps {
     open: boolean;
     onClose: () => void;
-    onLoginClick: () => void;
 }
 
-export const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({ open, onClose, onLoginClick }) => {
+export const ResetPasswordModal: React.FC<ResetPasswordModalProps> = ({ open, onClose }) => {
     const classes = useStyles();
 
-    const handleLoginClick = () => {
-        onClose();
-        onLoginClick();
-    };
 
     return (
         <Modal

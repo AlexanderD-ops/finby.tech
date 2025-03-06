@@ -26,7 +26,7 @@ jobs:
       
       - name: Build project
         run: |
-          cd finby.tech/landing
+          cd ./landing
           npm run build
            echo "Build output:"
            ls -la finby.tech/landing/build || echo "Build directory does not exist!"

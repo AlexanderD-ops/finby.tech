@@ -69,6 +69,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - name: Check build directory contents
+        run: |
+         ls -la landing/build
+         
       - name: Checkout repository
         uses: actions/checkout@v4
       

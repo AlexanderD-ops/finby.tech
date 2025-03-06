@@ -29,18 +29,18 @@ jobs:
           cd ./landing
           npm run build
            echo "Build output:"
-           ls -la ./landing/build || echo "Build directory does not exist!"
+           ls -la ./landing/building || echo "Build directory does not exist!"
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: ./landing/build
+          path: ./landing/building
 
       - name: Debug build output
         run: |
           cd ./landing
-          ls -la build || echo "Build directory does not exist!"
+          ls -la building || echo "Build directory does not exist!"
   test:
     runs-on: ubuntu-latest
     needs: build

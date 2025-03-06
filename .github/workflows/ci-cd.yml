@@ -78,20 +78,23 @@ jobs:
       
       - name: Install lftp
         run: sudo apt-get update -qy && sudo apt-get install -y lftp
-      
+      - name: Debug working directory
+        run: |
+         echo "Current working directory:"
+         pwd
+         echo "Root directory contents:"
+         ls -la
+
       - name: Deploy via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          cd landing
-          echo "Contents of build directory:"
-          ls -la build
           lftp -c "
           set ftp:ssl-force true;
           set ftp:ssl-protect-data true;
           set ssl:verify-certificate no;
           open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-          mirror --verbose --reverse --delete --continue build dev.finby.tech
+          mirror --verbose --reverse --delete --continue ./landing/build dev.finby.tech
           "

@@ -85,10 +85,13 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
+          cd landing
+          echo "Contents of build directory:"
+          ls -la build
           lftp -c "
           set ftp:ssl-force true;
           set ftp:ssl-protect-data true;
           set ssl:verify-certificate no;
           open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-          mirror --verbose --reverse --delete --continue finby.tech/landing/build public_html/dev.finby.tech
+          mirror --verbose --reverse --delete --continue build dev.finby.tech
           "

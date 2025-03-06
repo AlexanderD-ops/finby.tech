@@ -27,6 +27,9 @@ jobs:
       - name: Build project
         run: |
           cd landing
+          echo "Current directory after cd: $(pwd)"
+          echo "Listing contents of landing directory:"
+          ls -la
           npm run build
            echo "Build output:"
            ls -la build || echo "Build directory does not exist!"

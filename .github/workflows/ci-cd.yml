@@ -28,12 +28,15 @@ jobs:
         run: |
           cd landing
           npm run build
+           echo "Build output:"
+           ls -la landing/build || echo "Build directory does not exist!"
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
           path: landing/build
+
       - name: Debug build output
         run: |
           cd landing

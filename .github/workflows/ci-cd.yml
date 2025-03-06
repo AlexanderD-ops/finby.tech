@@ -21,12 +21,12 @@ jobs:
       
       - name: Install dependencies
         run: |
-          cd landing
+          cd ./landing
           npm ci
       
       - name: Build project
         run: |
-          cd landing
+          cd ./landing
           echo "Current directory after cd: $(pwd)"
           echo "Listing contents of landing directory:"
           ls -la
@@ -38,11 +38,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: landing/build
+          path: ./landing/build
 
       - name: Debug build output
         run: |
-          cd landing
+          cd ./landing
           ls -la build || echo "Build directory does not exist!"
   test:
     runs-on: ubuntu-latest
@@ -60,12 +60,12 @@ jobs:
       
       - name: Install dependencies
         run: |
-          cd landing
+          cd ./landing
           npm ci
       
       - name: Run tests
         run: |
-          cd landing
+          cd ./landing
           npm run test -- --coverage --watchAll=false
       
       - name: Upload test coverage
@@ -79,9 +79,9 @@ jobs:
              echo "Current working directory:"
              pwd
              echo "Landing directory contents:"
-             ls -la landing
+             ls -la ./landing
              echo "Build directory contents:"
-             ls -la landing/build || echo "Build directory not found!"
+             ls -la ./landing/build || echo "Build directory not found!"
              
   deploy:
     runs-on: ubuntu-latest

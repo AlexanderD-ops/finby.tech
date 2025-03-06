@@ -72,7 +72,7 @@ jobs:
       - name: Check build directory contents
         run: |
          ls -la landing/build
-         
+
       - name: Checkout repository
         uses: actions/checkout@v4
       
@@ -90,5 +90,5 @@ jobs:
           set ftp:ssl-protect-data true;
           set ssl:verify-certificate no;
           open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-          mirror --verbose --reverse --delete --continue landing/build dev.finby.tech
+          mirror --verbose --reverse --delete --continue landing/build public_html/dev.finby.tech
           "
